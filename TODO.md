@@ -2,8 +2,8 @@
 
 - Plan: `docs/plans/2026-08-05-gitnexus-plan-schema-driven-crm-library.md`
 - Branch: `feature/schema-ui-library-v1`
-- Active sub-step: **4.4 — Re-express editor ribbon as workspace configuration**
-- Status: In progress
+- Active sub-step: **5.1 — Implement reusable application shell regions**
+- Status: Pending — Phase 4 complete; Phase 5 (shell/regions/dialogs/child workspaces) next
 
 ## Documentation and activation
 
