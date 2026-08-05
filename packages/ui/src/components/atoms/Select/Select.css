@@ -1,0 +1,42 @@
+.ribbon-ui-select {
+  border: 1px solid var(--ribbon-ui-border-control);
+  border-radius: var(--ribbon-ui-radius-small);
+  color: var(--ribbon-ui-text-primary);
+  background: var(--ribbon-ui-surface-input);
+  font: inherit;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.ribbon-ui-select[data-size='small'] {
+  min-height: 1.75rem;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+}
+
+.ribbon-ui-select[data-size='medium'] {
+  min-height: 2.25rem;
+  padding: 0.375rem 0.625rem;
+  font-size: 0.875rem;
+}
+
+.ribbon-ui-select[data-size='large'] {
+  min-height: 2.75rem;
+  padding: 0.5rem 0.75rem;
+  font-size: 1rem;
+}
+
+.ribbon-ui-select:hover:not(:disabled) {
+  border-color: var(--ribbon-ui-border-control-hover);
+}
+
+.ribbon-ui-select:focus-visible {
+  outline: 2px solid var(--ribbon-ui-accent);
+  outline-offset: 2px;
+}
+
+.ribbon-ui-select:disabled {
+  color: var(--ribbon-ui-text-tertiary);
+  cursor: not-allowed;
+  opacity: 0.72;
+}

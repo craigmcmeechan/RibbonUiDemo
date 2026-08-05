@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ribbon-ui:schema:component:select:1.0.0",
+  "title": "SelectConfig",
+  "description": "Serializable configuration for the RibbonUI select atom.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "options"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[a-z][a-z0-9.-]*$",
+      "description": "Stable select instance identifier; also the native select DOM id."
+    },
+    "value": {
+      "type": "string",
+      "default": "",
+      "description": "Controlled selected option value owned by the host; empty when omitted."
+    },
+    "options": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["value", "label"],
+        "properties": {
+          "value": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Option form value submitted when selected."
+          },
+          "label": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Option visible text."
+          }
+        }
+      },
+      "description": "Allowlisted option list rendered as native option elements."
+    },
+    "placeholder": {
+      "type": "string",
+      "description": "Optional placeholder rendered as a disabled first option with an empty value."
+    },
+    "name": {
+      "type": "string",
+      "description": "Form field name for native form submission."
+    },
+    "size": {
+      "type": "string",
+      "enum": ["small", "medium", "large"],
+      "default": "medium",
+      "description": "Explicit field density and target size."
+    },
+    "disabled": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether native activation and focus participation are disabled."
+    },
+    "required": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether the field must have a value for native form submission."
+    }
+  }
+}
