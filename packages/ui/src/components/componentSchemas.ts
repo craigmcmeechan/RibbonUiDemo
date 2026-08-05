@@ -7,6 +7,8 @@ import colorSwatchSchema from './atoms/ColorSwatch/ColorSwatch.schema.json';
 import iconButtonSchema from './atoms/IconButton/IconButton.schema.json';
 import iconSchema from './atoms/Icon/Icon.schema.json';
 import labelSchema from './atoms/Label/Label.schema.json';
+import menuSchema from './molecules/Menu/Menu.schema.json';
+import menuItemSchema from './molecules/MenuItem/MenuItem.schema.json';
 import radioSchema from './atoms/Radio/Radio.schema.json';
 import selectSchema from './atoms/Select/Select.schema.json';
 import sliderSchema from './atoms/Slider/Slider.schema.json';
@@ -23,6 +25,8 @@ export const CHECKBOX_SCHEMA_ID = 'urn:ribbon-ui:schema:component:checkbox:1.0.0
 export const BUTTON_SCHEMA_ID = 'urn:ribbon-ui:schema:component:button:1.0.0' as const;
 export const ICON_BUTTON_SCHEMA_ID = 'urn:ribbon-ui:schema:component:icon-button:1.0.0' as const;
 export const ICON_SCHEMA_ID = 'urn:ribbon-ui:schema:component:icon:1.0.0' as const;
+export const MENU_ITEM_SCHEMA_ID = 'urn:ribbon-ui:schema:component:menu-item:1.0.0' as const;
+export const MENU_SCHEMA_ID = 'urn:ribbon-ui:schema:component:menu:1.0.0' as const;
 export const LABEL_SCHEMA_ID = 'urn:ribbon-ui:schema:component:label:1.0.0' as const;
 export const RADIO_SCHEMA_ID = 'urn:ribbon-ui:schema:component:radio:1.0.0' as const;
 export const SELECT_SCHEMA_ID = 'urn:ribbon-ui:schema:component:select:1.0.0' as const;
@@ -43,6 +47,8 @@ const ribbonComponentSchemas: readonly SchemaDefinition[] = Object.freeze([
   Object.freeze(iconButtonSchema),
   Object.freeze(iconSchema),
   Object.freeze(labelSchema),
+  Object.freeze(menuItemSchema),
+  Object.freeze(menuSchema),
   Object.freeze(radioSchema),
   Object.freeze(selectSchema),
   Object.freeze(sliderSchema),

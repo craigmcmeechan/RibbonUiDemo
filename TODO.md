@@ -2,8 +2,8 @@
 
 - Plan: `docs/plans/2026-08-05-gitnexus-plan-schema-driven-crm-library.md`
 - Branch: `feature/schema-ui-library-v1`
-- Active sub-step: **3.4 — Build accessible popup/dropdown primitives**
-- Status: Pending — Phase 3 atom layer complete; 3.4 (popup/dropdown primitives) next, pending parallelization discussion
+- Active sub-step: **3.4b — Add the schema-backed popover primitive**
+- Status: In progress
 
 ## Documentation and activation
 

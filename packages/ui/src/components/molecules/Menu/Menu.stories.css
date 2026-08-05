@@ -1,0 +1,11 @@
+.ribbon-ui-menu-story-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(11rem, 1fr));
+  gap: 1rem;
+}
+
+@media (max-width: 46rem) {
+  .ribbon-ui-menu-story-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,16 @@
+.ribbon-ui-menu {
+  display: flex;
+  flex-direction: column;
+  min-width: 10rem;
+  padding: 0.25rem 0;
+  border: 1px solid var(--ribbon-ui-border-popover);
+  border-radius: var(--ribbon-ui-radius-small);
+  background: var(--ribbon-ui-surface-popover);
+  box-shadow: 0 2px 8px var(--ribbon-ui-shadow-popover);
+  color: var(--ribbon-ui-text-primary);
+  font: inherit;
+}
+
+.ribbon-ui-menu:focus-visible {
+  outline: none;
+}

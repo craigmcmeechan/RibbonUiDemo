@@ -1,0 +1,30 @@
+.ribbon-ui-menu-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.375rem 0.75rem;
+  color: var(--ribbon-ui-text-primary);
+  font: inherit;
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+.ribbon-ui-menu-item:focus-visible {
+  outline: none;
+  background: var(--ribbon-ui-control-hover);
+}
+
+.ribbon-ui-menu-item:hover:not([data-disabled='true']) {
+  background: var(--ribbon-ui-control-hover);
+}
+
+.ribbon-ui-menu-item[data-disabled='true'] {
+  color: var(--ribbon-ui-text-tertiary);
+  cursor: not-allowed;
+}
+
+.ribbon-ui-menu-item__shortcut {
+  color: var(--ribbon-ui-text-primary);
+  font-size: 0.75rem;
+}
