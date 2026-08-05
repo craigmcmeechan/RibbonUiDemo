@@ -2,8 +2,8 @@
 
 - Plan: `docs/plans/2026-08-05-gitnexus-plan-schema-driven-crm-library.md`
 - Branch: `feature/schema-ui-library-v1`
-- Active sub-step: **3.3 — Add further atoms (split into next concrete atom sub-step before work begins)**
-- Status: Pending — 3.3c complete; next atom sub-step to be split before work begins
+- Active sub-step: **3.3d — Add the schema-backed label atom**
+- Status: In progress
 
 ## Documentation and activation
 
@@ -137,7 +137,26 @@
   - Tests: schema meta/strict validation, required/unknown/type/enum/default boundaries, input immutability, generated-type drift, and component-policy checks; config-to-rendering coverage for vertical/horizontal orientation branches; decorative `aria-hidden`, all-theme, Storybook interaction/a11y, and reviewed visual states; invalid-config safe failure through the catalog; strict quality/build/coverage/full regression; `git diff --check`; and GitNexus current-index/change/impact/cycle review.
   - Verification: `Separator` is independently packaged with a closed component-local schema, a generated configuration type, a runtime-only host layout class, decorative `aria-hidden` rendering without a role or accessible name, and token-only CSS consuming the shared `border-divider` token across vertical and horizontal orientations, with comprehensive Storybook documentation and a reviewed three-theme state matrix. The complete repository gate passed: 181 unit/schema/tooling tests, 20 Storybook interaction/accessibility tests, the production build, and the strict quality/format/schema-generation/component-policy checks; coverage remained above every 80% threshold at 94.69% statements, 92.37% branches, 89.43% functions, and 95.58% lines. GitNexus re-indexed the worktree (913 nodes, 1609 edges, 56 clusters, 36 flows); the change is purely additive (one new schema ID and component, no existing schema ID altered), so no existing caller is affected and risk is low. Source-based impact review was used because the GitNexus MCP impact/detect_changes sub-tools were not individually invocable this session, which the plan permits via source-checking missing edges.
   - Commit: `feat(atoms): add schema-backed separator behavior`.
-- **3.3 — Pending after 3.3c:** Add further atoms as one component per bounded sub-step. Message pattern: `feat(atoms): add schema-backed <component> behavior`.
+- **3.3d — In progress:** Add the schema-backed label atom.
+  - Scope: add an independently packaged `Label` atom for one visible text label, usable as a generic text label or, with a runtime `htmlFor` binding, as a form `<label>`. Keep JSON-serializable identity, text, and semantic emphasis in the component-local schema/generated configuration type; keep the host DOM association (`htmlFor`) and layout class in runtime-only props. Do not add commands, icons, interactive behavior, menus, required-field asterisks, or application-specific styling.
+  - Acceptance: `Label` has implementation, separate CSS, schema/generated types/authored runtime types, unit/schema tests, comprehensive Storybook documentation, and local/atomic/public barrels; valid schema configuration renders the matching text and emphasis variant; a runtime `htmlFor` upgrades the element to a form `<label>` associated with the target control; invalid configuration cannot reach rendering through the schema-backed path; the label supplies an accessible name when bound and reads as visible text otherwise; all-theme and density behavior consume only shared semantic text tokens; no local color literals.
+  - Targeted files: `packages/ui/src/components/atoms/Label/**`; atom/component/package barrels; the trusted schema catalog boundary; focused unit/schema/Storybook tests; `TODO.md`; and no application files.
+  - Tests: schema meta/strict validation, required/unknown/type/enum/default boundaries, input immutability, generated-type drift, and component-policy checks; config-to-rendering coverage for every variant branch; form `<label>` versus generic span selection through `htmlFor`; accessible-name association, all-theme, Storybook interaction/a11y, and reviewed visual states; invalid-config safe failure through the catalog; strict quality/build/coverage/full regression; `git diff --check`; and GitNexus current-index/change/impact/cycle review.
+  - Intended commit: `feat(atoms): add schema-backed label behavior`.
+- **3.3 — Pending atom roster (see `DevDocs/phase3-component-roster.md`):** Add domain-neutral leaf atoms, one component per bounded sub-step. Message pattern: `feat(atoms): add schema-backed <component> behavior`. Remaining pending atoms, in intended order:
+  - **3.3d — In progress:** Label (display). Intended commit: `feat(atoms): add schema-backed label behavior`.
+  - **3.3e — Pending:** Icon (display, standalone decorative). Intended commit: `feat(atoms): add schema-backed icon behavior`.
+  - **3.3f — Pending:** Badge (display, status pill). Intended commit: `feat(atoms): add schema-backed badge behavior`.
+  - **3.3g — Pending:** TextInput (input). Intended commit: `feat(atoms): add schema-backed text input behavior`.
+  - **3.3h — Pending:** TextArea (input). Intended commit: `feat(atoms): add schema-backed text area behavior`.
+  - **3.3i — Pending:** Checkbox (input). Intended commit: `feat(atoms): add schema-backed checkbox behavior`.
+  - **3.3j — Pending:** Radio (input). Intended commit: `feat(atoms): add schema-backed radio behavior`.
+  - **3.3k — Pending:** Switch (input). Intended commit: `feat(atoms): add schema-backed switch behavior`.
+  - **3.3l — Pending:** Select (input, native wrapper). Intended commit: `feat(atoms): add schema-backed select behavior`.
+  - **3.3m — Pending:** Slider (input). Intended commit: `feat(atoms): add schema-backed slider behavior`.
+  - **3.3n — Pending:** Spinner (feedback). Intended commit: `feat(atoms): add schema-backed spinner behavior`.
+  - **3.3o — Pending:** ColorSwatch (display). Intended commit: `feat(atoms): add schema-backed color swatch behavior`.
+  - Interaction primitives (MenuItem/Menu/Dropdown, ComboBox, Tooltip, SplitButton) and ribbon composites are NOT atoms; they build in 3.4 and Phase 4/5.
 - **3.4 — Pending:** Build accessible popup/dropdown primitives. Intended commit: `feat(atoms): add accessible popup interaction primitives`.
 
 ## Phase 4 — Schema-driven ribbon and layout regions
