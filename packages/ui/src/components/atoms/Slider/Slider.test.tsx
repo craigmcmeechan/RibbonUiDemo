@@ -47,7 +47,7 @@ describe('Slider', () => {
     },
   );
 
-  it('requests the next value through onChange when the host updates (controlled)', async () => {
+  it('requests the next value through onChange when the host updates (controlled)', () => {
     const onChange = vi.fn();
     function ControlledSlider() {
       const [value, setValue] = useState(40);
