@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ribbon-ui:schema:component:toggle-button:1.0.0",
+  "title": "ToggleButtonConfig",
+  "description": "Serializable configuration for the accessible RibbonUI toggle button atom.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "label", "pressed"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[a-z][a-z0-9.-]*$",
+      "description": "Stable toggle button instance identifier."
+    },
+    "label": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Visible text that also supplies the toggle button's accessible name."
+    },
+    "pressed": {
+      "type": "boolean",
+      "description": "Controlled pressed state rendered as aria-pressed; the host owns the value."
+    },
+    "variant": {
+      "type": "string",
+      "enum": ["neutral", "primary"],
+      "default": "neutral",
+      "description": "Semantic visual emphasis of the toggle button."
+    },
+    "size": {
+      "type": "string",
+      "enum": ["small", "medium", "large"],
+      "default": "medium",
+      "description": "Explicit toggle button density and target size."
+    },
+    "disabled": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether native activation and focus participation are disabled."
+    }
+  }
+}
