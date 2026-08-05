@@ -8,7 +8,7 @@ import type {
 } from './SchemaValidation.types';
 
 const SCHEMA_ID_PATTERN =
-  /^urn:ribbon-ui:schema:(component|shared|workspace):[a-z0-9]+(?:-[a-z0-9]+)*:(\d+\.\d+\.\d+)$/u;
+  /^urn:ribbon-ui:schema:(component|shared|workspace):[a-z0-9]+(?:-[a-z0-9]+)*:((?:0|[1-9]\d*)\.(?:0|[1-9]\d*)\.(?:0|[1-9]\d*))$/u;
 
 interface DiagnosticInput {
   readonly code: SchemaDiagnosticCode;
@@ -18,6 +18,8 @@ interface DiagnosticInput {
   readonly parameters?: Readonly<Record<string, SchemaDiagnosticParameter>>;
   readonly schemaId?: string;
   readonly schemaPath?: string;
+  readonly sourceVersion?: string;
+  readonly targetVersion?: string;
 }
 
 function freezeParameter(value: SchemaDiagnosticParameter): SchemaDiagnosticParameter {
@@ -86,6 +88,8 @@ export function createSchemaDiagnostic(input: DiagnosticInput): SchemaDiagnostic
     schemaPath: input.schemaPath ?? '',
     message: input.message,
     ...(input.keyword === undefined ? {} : { keyword: input.keyword }),
+    ...(input.sourceVersion === undefined ? {} : { sourceVersion: input.sourceVersion }),
+    ...(input.targetVersion === undefined ? {} : { targetVersion: input.targetVersion }),
     parameters,
   });
 }

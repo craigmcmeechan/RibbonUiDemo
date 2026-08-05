@@ -273,6 +273,123 @@ describe('createSchemaCatalog', () => {
     expect(result.ok).toBe(false);
   });
 
+  it('normalizes schema defaults into a new deeply frozen value', () => {
+    const schemaId = 'urn:ribbon-ui:schema:component:defaulted-control:1.0.0';
+    const catalog = requireCatalog([
+      {
+        $id: schemaId,
+        $schema: DRAFT_2020_12,
+        additionalProperties: false,
+        properties: {
+          items: {
+            items: {
+              additionalProperties: false,
+              properties: { active: { default: true, type: 'boolean' } },
+              type: 'object',
+            },
+            type: 'array',
+          },
+          mode: { default: 'compact', enum: ['compact', 'comfortable'] },
+          settings: {
+            additionalProperties: false,
+            default: {},
+            properties: { density: { default: 1, type: 'integer' } },
+            type: 'object',
+          },
+        },
+        required: ['items'],
+        type: 'object',
+      },
+    ]);
+    const input = { items: [{}] };
+    const result = catalog.normalize<{
+      items: readonly { active: boolean }[];
+      mode: string;
+      settings: { density: number };
+    }>(schemaId, input);
+
+    expect(result).toMatchObject({
+      ok: true,
+      value: {
+        items: [{ active: true }],
+        mode: 'compact',
+        settings: { density: 1 },
+      },
+    });
+    expect(input).toEqual({ items: [{}] });
+    if (result.ok) {
+      expect(result.value).not.toBe(input);
+      expect(Object.isFrozen(result.value)).toBe(true);
+      expect(Object.isFrozen(result.value.items[0])).toBe(true);
+      expect(Object.isFrozen(result.value.settings)).toBe(true);
+    }
+  });
+
+  it('preserves supplied values and reports invalid defaults without leaking them', () => {
+    const schemaId = 'urn:ribbon-ui:schema:component:invalid-default:1.0.0';
+    const catalog = requireCatalog([
+      {
+        $id: schemaId,
+        $schema: DRAFT_2020_12,
+        additionalProperties: false,
+        properties: { count: { default: 'not-an-integer', type: 'integer' } },
+        type: 'object',
+      },
+    ]);
+
+    expect(catalog.normalize(schemaId, { count: 2 })).toMatchObject({
+      ok: true,
+      value: { count: 2 },
+    });
+    const result = catalog.normalize(schemaId, {});
+    expect(result.ok).toBe(false);
+    if (!result.ok) {
+      expect(result.diagnostics[0]?.code).toBe('schema.normalization_failed');
+      expect(JSON.stringify(result.diagnostics)).not.toContain('not-an-integer');
+    }
+  });
+
+  it('rejects normalized output that exceeds configured resource limits', () => {
+    const schemaId = 'urn:ribbon-ui:schema:component:large-default:1.0.0';
+    const catalog = requireCatalog(
+      [
+        {
+          $id: schemaId,
+          $schema: DRAFT_2020_12,
+          additionalProperties: false,
+          properties: { label: { default: 'x'.repeat(100), type: 'string' } },
+          type: 'object',
+        },
+      ],
+      { maxInputBytes: 50 },
+    );
+    const result = catalog.normalize(schemaId, {});
+
+    expect(result.ok).toBe(false);
+    if (!result.ok) {
+      expect(result.diagnostics[0]?.code).toBe('schema.normalization_failed');
+      expect(JSON.stringify(result.diagnostics)).not.toContain('x'.repeat(20));
+    }
+  });
+
+  it('turns hostile input inspection failures into safe diagnostics', () => {
+    const hostile = new Proxy(
+      {},
+      {
+        ownKeys: () => {
+          throw new Error('sensitive proxy failure');
+        },
+      },
+    );
+    const result = requireCatalog().validate(COMPONENT_SCHEMA_ID, hostile);
+
+    expect(result.ok).toBe(false);
+    if (!result.ok) {
+      expect(result.diagnostics[0]?.code).toBe('schema.input.not_json');
+      expect(JSON.stringify(result.diagnostics)).not.toContain('sensitive proxy failure');
+    }
+  });
+
   it('fails duplicate, malformed, invalid, and unresolved schema catalogs safely', () => {
     expectCatalogFailure(
       createSchemaCatalog([componentSchema(), componentSchema()]),
@@ -280,6 +397,12 @@ describe('createSchemaCatalog', () => {
     );
     expectCatalogFailure(
       createSchemaCatalog([{ $id: 'unversioned', type: 'object' }]),
+      'schema.catalog.invalid_schema',
+    );
+    expectCatalogFailure(
+      createSchemaCatalog([
+        { $id: 'urn:ribbon-ui:schema:component:leading-zero:01.0.0', $schema: DRAFT_2020_12 },
+      ]),
       'schema.catalog.invalid_schema',
     );
     expectCatalogFailure(createSchemaCatalog([null]), 'schema.catalog.invalid_schema');

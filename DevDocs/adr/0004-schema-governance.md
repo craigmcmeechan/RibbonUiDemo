@@ -18,6 +18,7 @@ This ADR defines governance only. Runtime implementation begins in sub-step 2.3,
 - Runtime validation uses Ajv 8's dedicated Draft 2020-12 class. Exact dependency versions are selected and locked when sub-step 2.3 implements the validator.
 - The shared Ajv instance compiles trusted, built-in schemas once. It runs with strict schema/type/tuple/required checks and all-error reporting.
 - Validation never mutates input: type coercion, default assignment, and removal of additional properties are disabled. Invalid input is rejected, not silently repaired.
+- The production catalog exposes normalization as a separate operation: it first validates without mutation, clones bounded JSON data, applies trusted schema defaults through a separately compiled Ajv validator, rechecks resource limits, and returns a deeply frozen value. Raw validators and mutable schema/default state are not exposed.
 - Custom formats or keywords are unavailable unless separately registered, documented, and tested. Different JSON Schema drafts do not share the validator instance.
 
 ### Authoritative and derived contracts
@@ -82,6 +83,7 @@ CI fails when schema properties are absent from generated config types or Storyb
 - Patch changes clarify annotations or correct behavior without changing accepted instances. Minor changes are backward-compatible additions, such as a new optional property. Removing/renaming a property, adding a required property, narrowing a constraint, changing a type, or adding an enum member that can break exhaustive TypeScript consumers is major.
 - The workspace document carries the source `schemaVersion`. Component schema versions are resolved by the versioned workspace schema and registry; component nodes do not repeat a version in v1.
 - The loader accepts the exact current version or an explicitly registered older v1 version. Pure, deterministic, sequential migrations transform a cloned document to the current version, after which the complete result is validated.
+- The v1 migration pipeline is built from an immutable, explicit registry. It rejects duplicate, malformed, cross-major, incomplete, or schema/version-mismatched paths before use. Each trusted migration receives a cloned, deeply frozen JSON value; its bounded result must declare the registered target version. Exact-current documents bypass migration functions, while all successful paths finish through catalog validation and normalization.
 - All published v1 workspace versions remain migratable for the lifetime of v1. Unknown future versions, unregistered versions, and other majors fail without best-effort rendering. Cross-major retention/deprecation policy must be decided before v2 release.
 - Any component-config compatibility change that affects serialized workspace documents also updates the workspace schema version and migration set in the same bounded sub-step.
 
@@ -129,7 +131,7 @@ The component owner owns its schema, generated config type, runtime props, tests
 ## Deferred implementation choices
 
 - Exact package versions and the JSON-Schema-to-TypeScript generator, subject to the fixture gate above.
-- Normalizer API, validator bundling versus Ajv standalone output, and schema catalog export mechanics.
+- Validator bundling versus Ajv standalone output and schema catalog export mechanics.
 - Concrete configuration size/depth/collection limits, diagnostic localization, and supported custom formats.
 - Cross-major migration retention and deprecation windows beyond v1.
 

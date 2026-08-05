@@ -9,6 +9,7 @@ import {
 import type {
   SchemaCatalog,
   SchemaCatalogResult,
+  SchemaJsonValue,
   SchemaValidationLimits,
   SchemaValidationResult,
 } from './SchemaValidation.types';
@@ -41,6 +42,10 @@ interface InputFailure {
     | 'schema.input.too_large'
     | 'schema.input.too_many_items';
   readonly message: string;
+}
+
+interface JsonCloneSuccess {
+  readonly value: SchemaJsonValue;
 }
 
 interface PendingValue {
@@ -204,13 +209,55 @@ function schemaRecord(value: unknown): Readonly<Record<string, unknown>> | undef
     : undefined;
 }
 
-function cloneSchema(schema: Readonly<Record<string, unknown>>): AnySchemaObject | undefined {
+export function cloneBoundedJsonValue(
+  input: unknown,
+  limits: SchemaValidationLimits = DEFAULT_LIMITS,
+): InputFailure | JsonCloneSuccess {
   try {
-    const serialized = JSON.stringify(schema);
-    return JSON.parse(serialized) as AnySchemaObject;
+    const measurement = measureJsonInput(input, limits);
+    if ('code' in measurement) {
+      return measurement;
+    }
+    return { value: JSON.parse(JSON.stringify(input)) as SchemaJsonValue };
   } catch {
-    return undefined;
+    return { code: 'schema.input.not_json', message: 'Input must contain only JSON data.' };
   }
+}
+
+export function freezeJsonValue<Value>(value: Value): Value {
+  const pending: object[] = [];
+  if (typeof value === 'object' && value !== null) {
+    pending.push(value);
+  }
+
+  while (pending.length > 0) {
+    const current = pending.pop();
+    if (current === undefined || Object.isFrozen(current)) {
+      continue;
+    }
+    for (const item of Object.values(current as Readonly<Record<string, unknown>>)) {
+      if (typeof item === 'object' && item !== null) {
+        pending.push(item);
+      }
+    }
+    Object.freeze(current);
+  }
+
+  return value;
+}
+
+function createAjv(useDefaults: boolean): Ajv2020 {
+  return new Ajv2020({
+    allErrors: true,
+    coerceTypes: false,
+    messages: false,
+    ownProperties: true,
+    removeAdditional: false,
+    strict: true,
+    strictRequired: true,
+    useDefaults,
+    validateSchema: true,
+  });
 }
 
 function catalogFailure(
@@ -232,16 +279,61 @@ function catalogFailure(
 class CompiledSchemaCatalog implements SchemaCatalog {
   readonly schemaIds: readonly string[];
   readonly #limits: SchemaValidationLimits;
+  readonly #normalizers: ReadonlyMap<string, ValidateFunction>;
   readonly #validators: ReadonlyMap<string, ValidateFunction>;
 
   constructor(
     validators: ReadonlyMap<string, ValidateFunction>,
+    normalizers: ReadonlyMap<string, ValidateFunction>,
     schemaIds: readonly string[],
     limits: SchemaValidationLimits,
   ) {
     this.#validators = validators;
+    this.#normalizers = normalizers;
     this.schemaIds = Object.freeze([...schemaIds]);
     this.#limits = limits;
+  }
+
+  normalize<Value = unknown>(schemaId: string, input: unknown): SchemaValidationResult<Value> {
+    const validation = this.validate(schemaId, input);
+    if (!validation.ok) {
+      return validation;
+    }
+
+    const cloned = cloneBoundedJsonValue(input, this.#limits);
+    const normalizer = this.#normalizers.get(schemaId);
+    if ('code' in cloned || normalizer === undefined || !normalizer(cloned.value)) {
+      return Object.freeze({
+        ok: false,
+        diagnostics: Object.freeze([
+          createSchemaDiagnostic({
+            code: 'schema.normalization_failed',
+            message: 'Validated input could not be normalized.',
+            schemaId,
+          }),
+        ]),
+      });
+    }
+
+    const normalized = cloneBoundedJsonValue(cloned.value, this.#limits);
+    if ('code' in normalized) {
+      return Object.freeze({
+        ok: false,
+        diagnostics: Object.freeze([
+          createSchemaDiagnostic({
+            code: 'schema.normalization_failed',
+            message: 'Normalized input exceeds supported resource limits.',
+            schemaId,
+          }),
+        ]),
+      });
+    }
+
+    return Object.freeze({
+      ok: true,
+      schemaId,
+      value: freezeJsonValue(normalized.value) as Value,
+    });
   }
 
   validate<Value = unknown>(schemaId: string, input: unknown): SchemaValidationResult<Value> {
@@ -258,7 +350,15 @@ class CompiledSchemaCatalog implements SchemaCatalog {
       });
     }
 
-    const measurement = measureJsonInput(input, this.#limits);
+    let measurement: InputFailure | InputMeasurement;
+    try {
+      measurement = measureJsonInput(input, this.#limits);
+    } catch {
+      measurement = {
+        code: 'schema.input.not_json',
+        message: 'Input must contain only JSON data.',
+      };
+    }
     if ('code' in measurement) {
       return Object.freeze({
         ok: false,
@@ -309,13 +409,14 @@ export function createSchemaCatalog(
       );
     }
 
-    const schemaMeasurement = measureJsonInput(record, HARD_LIMITS);
-    if ('code' in schemaMeasurement) {
+    const schemaClone = cloneBoundedJsonValue(record, HARD_LIMITS);
+    if ('code' in schemaClone) {
       return catalogFailure('Schema definitions must contain only bounded JSON data.');
     }
 
-    const schemaId = record['$id'];
-    const dialect = record['$schema'];
+    const cloned = schemaClone.value as AnySchemaObject;
+    const schemaId = cloned.$id;
+    const dialect = cloned.$schema;
     if (
       typeof schemaId !== 'string' ||
       !isSupportedSchemaId(schemaId) ||
@@ -334,24 +435,11 @@ export function createSchemaCatalog(
       );
     }
 
-    const cloned = cloneSchema(record);
-    if (cloned === undefined) {
-      return catalogFailure('Schema must be serializable JSON.', schemaId);
-    }
     clonedSchemas.set(schemaId, cloned);
   }
 
-  const ajv = new Ajv2020({
-    allErrors: true,
-    coerceTypes: false,
-    messages: false,
-    ownProperties: true,
-    removeAdditional: false,
-    strict: true,
-    strictRequired: true,
-    useDefaults: false,
-    validateSchema: true,
-  });
+  const ajv = createAjv(false);
+  const normalizationAjv = createAjv(true);
 
   try {
     for (const schema of clonedSchemas.values()) {
@@ -359,21 +447,30 @@ export function createSchemaCatalog(
         return catalogFailure('Schema does not satisfy the Draft 2020-12 meta-schema.', schema.$id);
       }
       ajv.addSchema(schema);
+      normalizationAjv.addSchema(schema);
     }
 
     const validators = new Map<string, ValidateFunction>();
+    const normalizers = new Map<string, ValidateFunction>();
     for (const schemaId of clonedSchemas.keys()) {
       const validator = ajv.getSchema(schemaId);
-      if (validator === undefined) {
+      const normalizer = normalizationAjv.getSchema(schemaId);
+      if (validator === undefined || normalizer === undefined) {
         return catalogFailure('Schema could not be compiled.', schemaId);
       }
       validators.set(schemaId, validator);
+      normalizers.set(schemaId, normalizer);
     }
 
     return Object.freeze({
       ok: true,
       catalog: Object.freeze(
-        new CompiledSchemaCatalog(validators, [...clonedSchemas.keys()].sort(), limits),
+        new CompiledSchemaCatalog(
+          validators,
+          normalizers,
+          [...clonedSchemas.keys()].sort(),
+          limits,
+        ),
       ),
     });
   } catch {
