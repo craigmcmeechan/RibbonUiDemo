@@ -38,6 +38,16 @@ Application-specific experiences are separate workspace definitions or configura
 
 The representation of a workspace configuration is intentionally unspecified here. This target does not yet decide the JSON shape, TypeScript API, registry contract, command payloads, state model, or persistence format.
 
+## Shared theme requirement
+
+This is a target requirement, not a description of the demo's current theme implementation.
+
+The target will include a React theme provider built from the demo's existing `modern-light`, `classic-light`, and `modern-dark` theme choices. The provider will expose one shared token and React-context contract rather than page-specific theme styling.
+
+Every new foundational atomic component and every composed workspace region—including ribbon, navigation/panels, status bar, and content surface—must consume that same theme contract. Editor, CRM, and any other workspace composition therefore participate in one coherent application theme rather than defining independent region or page themes.
+
+This requirement does not yet define the provider API, token schema, hook names, CSS mechanism, persistence behavior, or component implementation.
+
 ## Current demo and target-workspace direction
 
 The current RibbonUI demo is the Editor workspace in this target model. The likely concrete product direction is a CRM workspace with a classic-Outlook-inspired shell. This is a target-workspace descriptor, not current implementation.
@@ -63,6 +73,7 @@ A Spreadsheet workspace remains an example of how the same shell could support a
 - Workspace configuration composes reusable primitives; it does not turn those primitives into editor-specific components.
 - Domain behavior belongs to the workspace, not to the reusable shell.
 - The theme provider and layout-region contracts are shared across workspaces.
+- Foundational atomic components and composed workspace regions consume the same shared theme token/context contract.
 - Different workspaces may supply different region contents while retaining the same shell foundation.
 - Adding another workspace must not require the shared library to adopt that workspace's domain concepts.
 

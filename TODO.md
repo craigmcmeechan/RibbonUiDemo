@@ -7,7 +7,8 @@
 ## Ordered steps
 
 1. Document the target architecture without mixing it with current-state analysis or implementation planning.
-   - **1.1 — Completed:** Added the reusable-shell target note and CRM product-direction descriptor; kept Spreadsheet illustrative only. Documentation scope, terminology, Markdown, whitespace, and application-code isolation checks passed. GitNexus reported two documentation files, zero changed symbols, and zero affected processes; symbol impact analysis was not applicable. Commit: this commit (`docs: record reusable shell and CRM workspace target`). Push: not attempted because HEAD is detached and no remote is configured.
+   - **1.1 — Completed:** Added the reusable-shell target note and CRM product-direction descriptor; kept Spreadsheet illustrative only. Documentation scope, terminology, Markdown, whitespace, and application-code isolation checks passed. GitNexus reported two documentation files, zero changed symbols, and zero affected processes; symbol impact analysis was not applicable. Commit: `552a4f9` (`docs: record reusable shell and CRM workspace target`). Push: not attempted because HEAD was detached and no remote was configured.
+   - **1.2 — Completed:** Clarified the target shared theme token/context contract and its required use by foundational atomic components and composed workspace regions while preserving the CRM direction and deferring provider API design. Documentation terminology, Markdown, whitespace, and application-code isolation checks passed. GitNexus reported two documentation files, zero changed symbols, and zero affected processes; symbol impact analysis was not applicable. Commit: this commit (`docs: clarify shared theme target`). Push: not attempted because HEAD is detached and no remote is configured.
 
 ## Tracking rules
 
