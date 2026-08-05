@@ -2,7 +2,7 @@
 
 - Plan: `docs/plans/2026-08-05-gitnexus-plan-schema-driven-crm-library.md`
 - Branch: `feature/schema-ui-library-v1`
-- Active sub-step: **1.3 — Add shared ESLint and Prettier gates**
+- Active sub-step: **1.4 — Establish unit, Storybook, E2E, visual, and CI harnesses**
 - Status: In progress
 
 ## Documentation and activation
@@ -26,8 +26,14 @@
   - Tests: frozen install, root and per-project forced typechecks, root and direct builds repeated twice, declaration-content checks, no-JavaScript/new-config source scan, production-bundle HTTP smoke checks, `git diff --check`, and GitNexus current-index/staged detection/impact/cycle review.
   - Verification: all listed checks passed without source suppressions. The effective UI config retained every recorded strict flag; the root graph and each project forced typechecked; two consecutive builds retained ESM and declaration outputs; bundle HTTP smokes passed; legacy source remained unchanged. GitNexus staged detection reported low risk and no affected process, import-cycle analysis was clean, and pre-change entry-point impacts were low; compiler/config blast radius was verified through the full forced project graph because GitNexus does not model `tsconfig` semantics.
   - Commit: `chore(types): enforce strict shared TypeScript checks`.
-- **1.3 — In progress:** Add shared ESLint and Prettier gates. Intended commit: `chore(quality): add shared lint and formatting gates`.
-- **1.4 — Pending:** Establish unit, Storybook, E2E, visual, and CI harnesses. Intended commit: `test(tooling): establish UI verification harnesses`.
+- **1.3 — Completed:** Add shared ESLint and Prettier gates.
+  - Scope: add a root ESLint flat configuration, type-aware TypeScript/React rules, Prettier configuration and ignores, repository scripts for check/fix workflows, and dependency versions with an officially supported TypeScript/parser pairing. Exclude legacy and generated output without weakening new-code rules.
+  - Acceptance: lint fails on warnings and covers new TypeScript/TSX plus configuration scripts; Prettier checks source, JSON, YAML, Markdown, HTML, and future CSS while preserving lockfiles/generated artifacts; the combined quality command passes; the strict compiler and builds remain green after aligning TypeScript to the supported 6.0 line.
+  - Targeted files: `package.json`, `pnpm-lock.yaml`, `eslint.config.mjs`, `prettier.config.mjs`, `.prettierignore`, `TODO.md`, and only non-generated source/config/documentation changed by the deterministic formatter.
+  - Tests: frozen install, lint, format check, combined quality gate, root/per-project typechecks, repeated root builds, declaration and HTTP smoke checks, legacy unchanged check, `git diff --check`, and GitNexus current-index/staged detection/impact/cycle review.
+  - Verification: frozen install, zero-warning lint, Prettier check, combined quality gate, root/per-project strict typechecks, two consecutive builds, declaration checks, lint-rule coverage inspection, application HTTP smokes, unchanged legacy/plan checks, and diff checks passed. TypeScript was aligned from 7.0.2 to 6.0.3 because `typescript-eslint` 8.66 officially supports versions below 6.1. GitNexus staged detection reported low risk with no affected process, cycle analysis was clean, and the config helper had one expected same-file caller at low impact.
+  - Commit: `chore(quality): add shared lint and formatting gates`.
+- **1.4 — In progress:** Establish unit, Storybook, E2E, visual, and CI harnesses. Intended commit: `test(tooling): establish UI verification harnesses`.
 
 ## Phase 2 — Reusable foundation contracts
 

@@ -54,15 +54,15 @@ The current RibbonUI demo is the Editor workspace in this target model. The like
 
 The CRM workspace will provide a left-hand pop-out or tabbed navigation area for major sections, such as Contacts and Products. Its main workspace will present one active section at a time in a tabbed or section-oriented view.
 
-| Concern | Editor workspace | CRM workspace (product direction) | Shared library responsibility |
-| --- | --- | --- | --- |
-| Navigation | Editor navigation defined by the Editor workspace | CRM-owned left-hand pop-out/tabbed entries for major sections | Navigation/panel-region primitives and shell placement |
-| Ribbon | Editor-specific authoring and review layout | CRM-defined ribbon layout | Ribbon-region primitives and shell placement |
-| Panels | Document navigation and editor settings | CRM-defined panels | Left/right panel-region primitives |
-| Status bar | Document/page/editor status | CRM-defined status content | Status-bar region and composition boundary |
-| Commands | Document editing and formatting commands | CRM-defined commands | Common command attachment boundary, not domain commands |
-| Content | Editable document surface | One active CRM section in a tabbed or section-oriented main view | Main content-region primitive |
-| Theme | Consumes shared theme context | Consumes shared theme context | Theme provider and shared context |
+| Concern    | Editor workspace                                  | CRM workspace (product direction)                                | Shared library responsibility                           |
+| ---------- | ------------------------------------------------- | ---------------------------------------------------------------- | ------------------------------------------------------- |
+| Navigation | Editor navigation defined by the Editor workspace | CRM-owned left-hand pop-out/tabbed entries for major sections    | Navigation/panel-region primitives and shell placement  |
+| Ribbon     | Editor-specific authoring and review layout       | CRM-defined ribbon layout                                        | Ribbon-region primitives and shell placement            |
+| Panels     | Document navigation and editor settings           | CRM-defined panels                                               | Left/right panel-region primitives                      |
+| Status bar | Document/page/editor status                       | CRM-defined status content                                       | Status-bar region and composition boundary              |
+| Commands   | Document editing and formatting commands          | CRM-defined commands                                             | Common command attachment boundary, not domain commands |
+| Content    | Editable document surface                         | One active CRM section in a tabbed or section-oriented main view | Main content-region primitive                           |
+| Theme      | Consumes shared theme context                     | Consumes shared theme context                                    | Theme provider and shared context                       |
 
 The CRM workspace owns its navigation entries, ribbon layout, panels, status content, commands, and content views while composing the shared library primitives and theme provider. This document does not define CRM entities, data models, workflows, persistence, or detailed behavior.
 

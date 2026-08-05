@@ -10,7 +10,5 @@
     "outDir": "dist",
     "tsBuildInfoFile": "dist/ui.tsbuildinfo"
   },
-  "include": [
-    "src"
-  ]
+  "include": ["src"]
 }

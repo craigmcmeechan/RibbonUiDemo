@@ -15,17 +15,17 @@ RibbonUI Demo is a browser-only interactive prototype of a word processor with a
 
 ## Major components
 
-| Area | Source | Current responsibility |
-| --- | --- | --- |
-| Application shell and controller | `app.jsx` | Owns shared React state and DOM refs; builds the `ctx` property bag; implements editing, insertion, zoom, panels, theme, and keyboard commands; composes the page. |
-| Title bar | `titlebar.jsx` | Document title, quick-access menus, print/undo/redo commands, static account UI, and close button. |
-| Ribbon host | `ribbon.jsx` | Selects the active ribbon tab, opens File backstage, and preserves document selection when ribbon controls are clicked. |
-| Core ribbon tabs | `ribbon-home.jsx` | Home, Insert, Layout, and View controls. Wired controls call functions or setters supplied by `ctx`; many advanced controls are visual placeholders. |
-| Additional ribbon tabs | `ribbon-more.jsx` | Draw, References, Collaboration, Protection, Plugins, and AI controls. Most non-display features are state toggles or prototype-only buttons. |
-| Workspace rails and panels | `workspace.jsx` | Left search/comments/chat/navigation panels and right object/settings panels. Navigation and paragraph spacing/background have limited live behavior; most other panel content is static or local-only. |
-| Document and overlays | `doc-status.jsx` | The editable sample document, ruler and zoom transform, status bar, File backstage, share dialog, and plugin dialog. |
-| Shared UI primitives | `primitives.jsx` | Dropdown positioning/dismissal, menus, ribbon groups/buttons, palettes, combos, and check controls. |
-| Icons and styling | `icons.jsx`, `styles.css` | Inline SVG icon registry and the complete layout/theme CSS. CSS custom properties define modern-light, classic-light, and modern-dark themes. |
+| Area                             | Source                    | Current responsibility                                                                                                                                                                                  |
+| -------------------------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Application shell and controller | `app.jsx`                 | Owns shared React state and DOM refs; builds the `ctx` property bag; implements editing, insertion, zoom, panels, theme, and keyboard commands; composes the page.                                      |
+| Title bar                        | `titlebar.jsx`            | Document title, quick-access menus, print/undo/redo commands, static account UI, and close button.                                                                                                      |
+| Ribbon host                      | `ribbon.jsx`              | Selects the active ribbon tab, opens File backstage, and preserves document selection when ribbon controls are clicked.                                                                                 |
+| Core ribbon tabs                 | `ribbon-home.jsx`         | Home, Insert, Layout, and View controls. Wired controls call functions or setters supplied by `ctx`; many advanced controls are visual placeholders.                                                    |
+| Additional ribbon tabs           | `ribbon-more.jsx`         | Draw, References, Collaboration, Protection, Plugins, and AI controls. Most non-display features are state toggles or prototype-only buttons.                                                           |
+| Workspace rails and panels       | `workspace.jsx`           | Left search/comments/chat/navigation panels and right object/settings panels. Navigation and paragraph spacing/background have limited live behavior; most other panel content is static or local-only. |
+| Document and overlays            | `doc-status.jsx`          | The editable sample document, ruler and zoom transform, status bar, File backstage, share dialog, and plugin dialog.                                                                                    |
+| Shared UI primitives             | `primitives.jsx`          | Dropdown positioning/dismissal, menus, ribbon groups/buttons, palettes, combos, and check controls.                                                                                                     |
+| Icons and styling                | `icons.jsx`, `styles.css` | Inline SVG icon registry and the complete layout/theme CSS. CSS custom properties define modern-light, classic-light, and modern-dark themes.                                                           |
 
 ## State and control flow
 

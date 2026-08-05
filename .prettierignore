@@ -1,0 +1,11 @@
+legacy-editor-claude-design-template/
+.gitnexus/
+node_modules/
+dist/
+coverage/
+pnpm-lock.yaml
+docs/plans/
+*.tsbuildinfo
+**/*.d.ts
+**/__snapshots__/
+**/visual-baselines/

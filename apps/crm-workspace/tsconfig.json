@@ -5,9 +5,7 @@
     "noEmit": true,
     "tsBuildInfoFile": "../../node_modules/.cache/typescript/crm-workspace.tsbuildinfo"
   },
-  "include": [
-    "src"
-  ],
+  "include": ["src"],
   "references": [
     {
       "path": "../../packages/ui"

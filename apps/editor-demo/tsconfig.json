@@ -5,9 +5,7 @@
     "noEmit": true,
     "tsBuildInfoFile": "../../node_modules/.cache/typescript/editor-demo.tsbuildinfo"
   },
-  "include": [
-    "src"
-  ],
+  "include": ["src"],
   "references": [
     {
       "path": "../../packages/ui"

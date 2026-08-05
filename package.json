@@ -17,9 +17,21 @@
     "typecheck": "tsc --build --force --pretty false",
     "typecheck:ui": "tsc --build packages/ui/tsconfig.json --force --pretty false",
     "typecheck:editor": "tsc --build apps/editor-demo/tsconfig.json --force --pretty false",
-    "typecheck:crm": "tsc --build apps/crm-workspace/tsconfig.json --force --pretty false"
+    "typecheck:crm": "tsc --build apps/crm-workspace/tsconfig.json --force --pretty false",
+    "lint": "eslint . --max-warnings 0",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "quality": "pnpm typecheck && pnpm lint && pnpm format:check"
   },
   "devDependencies": {
-    "typescript": "^7.0.2"
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.8.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.3",
+    "globals": "^17.9.0",
+    "prettier": "^3.9.6",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.66.0"
   }
 }
