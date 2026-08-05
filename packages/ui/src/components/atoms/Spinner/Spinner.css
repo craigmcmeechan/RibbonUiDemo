@@ -1,0 +1,46 @@
+.ribbon-ui-spinner {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  line-height: 0;
+}
+
+.ribbon-ui-spinner__ring {
+  display: inline-block;
+  border-radius: 999px;
+  border-color: var(--ribbon-ui-accent);
+  border-style: solid;
+  border-top-color: transparent;
+  animation: ribbon-ui-spinner-spin 0.9s linear infinite;
+}
+
+.ribbon-ui-spinner[data-size='small'] .ribbon-ui-spinner__ring {
+  width: 1rem;
+  height: 1rem;
+  border-width: 2px;
+}
+
+.ribbon-ui-spinner[data-size='medium'] .ribbon-ui-spinner__ring {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-width: 2px;
+}
+
+.ribbon-ui-spinner[data-size='large'] .ribbon-ui-spinner__ring {
+  width: 2rem;
+  height: 2rem;
+  border-width: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ribbon-ui-spinner__ring {
+    animation: none;
+  }
+}
+
+@keyframes ribbon-ui-spinner-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

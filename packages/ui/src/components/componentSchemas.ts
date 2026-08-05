@@ -10,6 +10,7 @@ import radioSchema from './atoms/Radio/Radio.schema.json';
 import selectSchema from './atoms/Select/Select.schema.json';
 import sliderSchema from './atoms/Slider/Slider.schema.json';
 import separatorSchema from './atoms/Separator/Separator.schema.json';
+import spinnerSchema from './atoms/Spinner/Spinner.schema.json';
 import switchSchema from './atoms/Switch/Switch.schema.json';
 import textAreaSchema from './atoms/TextArea/TextArea.schema.json';
 import toggleButtonSchema from './atoms/ToggleButton/ToggleButton.schema.json';
@@ -24,6 +25,7 @@ export const LABEL_SCHEMA_ID = 'urn:ribbon-ui:schema:component:label:1.0.0' as c
 export const RADIO_SCHEMA_ID = 'urn:ribbon-ui:schema:component:radio:1.0.0' as const;
 export const SELECT_SCHEMA_ID = 'urn:ribbon-ui:schema:component:select:1.0.0' as const;
 export const SEPARATOR_SCHEMA_ID = 'urn:ribbon-ui:schema:component:separator:1.0.0' as const;
+export const SPINNER_SCHEMA_ID = 'urn:ribbon-ui:schema:component:spinner:1.0.0' as const;
 export const SLIDER_SCHEMA_ID = 'urn:ribbon-ui:schema:component:slider:1.0.0' as const;
 export const SWITCH_SCHEMA_ID = 'urn:ribbon-ui:schema:component:switch:1.0.0' as const;
 export const TEXT_AREA_SCHEMA_ID = 'urn:ribbon-ui:schema:component:text-area:1.0.0' as const;
@@ -41,6 +43,7 @@ const ribbonComponentSchemas: readonly SchemaDefinition[] = Object.freeze([
   Object.freeze(radioSchema),
   Object.freeze(selectSchema),
   Object.freeze(sliderSchema),
+  Object.freeze(spinnerSchema),
   Object.freeze(separatorSchema),
   Object.freeze(switchSchema),
   Object.freeze(textAreaSchema),

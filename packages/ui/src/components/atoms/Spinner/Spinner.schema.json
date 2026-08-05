@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ribbon-ui:schema:component:spinner:1.0.0",
+  "title": "SpinnerConfig",
+  "description": "Serializable configuration for the RibbonUI spinner atom.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[a-z][a-z0-9.-]*$",
+      "description": "Stable spinner instance identifier."
+    },
+    "label": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Optional accessible loading message; when present the spinner becomes a role=status live region."
+    },
+    "size": {
+      "type": "string",
+      "enum": ["small", "medium", "large"],
+      "default": "medium",
+      "description": "Explicit ring diameter."
+    }
+  }
+}
