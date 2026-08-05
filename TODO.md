@@ -2,7 +2,7 @@
 
 - Plan: `docs/plans/2026-08-05-gitnexus-plan-schema-driven-crm-library.md`
 - Branch: `feature/schema-ui-library-v1`
-- Active sub-step: **2.2 — Decide schema governance and synchronization**
+- Active sub-step: **2.3a — Prove the schema generation and validation toolchain**
 - Status: In progress
 
 ## Documentation and activation
@@ -50,13 +50,21 @@
   - Tests: deterministic legacy static-server smoke and characterization scenarios, baseline generation/comparison where appropriate, existing `pnpm verify`, source-backed scenario review, unchanged legacy source check, `git diff --check`, and GitNexus current-index/change/impact/cycle review.
   - Verification: the unchanged legacy source was served through the existing Playwright harness with exact React 18.3.1, ReactDOM 18.3.1, and Babel 7.29.0 packages resolved locally from `package.json`; frozen install and pnpm peer checks passed. Nine Chromium characterization scenarios covered startup/status, theme persistence, ribbon/panel state, document-selection preservation, contenteditable word counts, zoom bounds, Backstage, Share/Plugins overlays, and Ctrl+F's current no-focus behavior. Reviewed light/dark Windows baselines compared successfully. The full strict quality/build/coverage/Storybook/E2E/visual suite, unchanged-legacy check, and diff checks passed. GitNexus indexed the exact working tree with PDG, found no import cycles, classified the configuration diff as low risk, and found the shared legacy-page helper's two expected direct test consumers at low impact. Kimi proposals were treated as advisory; unsupported persistence and ARIA assumptions were rejected through direct source/browser verification.
   - Commit: `test(editor): capture legacy migration baselines`.
-- **2.2 — In progress:** Decide schema governance and synchronization.
+- **2.2 — Completed:** Decide schema governance and synchronization.
   - Scope: create an ADR choosing the JSON Schema draft, runtime validator, schema identifier/version convention, component-local schema source-of-truth and TypeScript synchronization direction, required/default/enum/additional-property policy, composition rules, supported migration window and ownership, and structured diagnostic contract. This is a governance decision only; do not implement schema runtime behavior.
   - Acceptance: decisions are supported by primary documentation and repository constraints; every component's schema/TypeScript/Storybook/runtime-validation synchronization responsibilities are explicit; compatibility, failure, migration, testing, and ownership rules are enforceable; alternatives and deferred implementation details are recorded without inventing product decisions.
   - Targeted files: one focused schema-governance ADR in `DevDocs/adr/` and `TODO.md` only.
   - Tests: primary-source link verification, decision/requirement coverage checklist, Markdown formatting, unchanged production/config/test source check, `git diff --check`, and GitNexus current-index/change/impact/cycle review.
-  - Intended commit: `docs(schema): define versioned component contract governance`.
-- **2.3 — Pending:** Implement validation, diagnostics, and schema composition core. Intended commit: `feat(schema): add versioned validation and diagnostics core`.
+  - Verification: ADR 0004 covers the selected Draft 2020-12/Ajv 8 contract, schema-first generated TypeScript boundary, component-local layout, strict immutable validation, closed/local composition, Storybook synchronization, SemVer and v1 migrations, structured redacted diagnostics, security boundaries, ownership, acceptance gates, rejected alternatives, and deferred implementation choices. All eleven primary-reference URLs returned HTTP 200, the governance coverage checklist and Markdown/diff checks passed, and no non-ADR/TODO file changed. GitNexus indexed the exact documentation state with PDG, reported no code change or affected process, and found no import cycles. A Gemma checklist was used only as a completeness aid; the hosted lead verified sources and made every decision.
+  - Commit: `docs(schema): define versioned component contract governance`.
+- **2.3a — In progress:** Prove the schema generation and validation toolchain.
+  - Scope: add the selected Ajv 8 Draft 2020-12 runtime and a deterministic schema-to-TypeScript generator; create a non-public contract fixture exercising local/versioned references, required and optional properties, defaults, enums, unions, closed composition, and runtime-only prop separation; add root scripts that generate/check types and strictly compile/meta-validate schemas. Do not add a public component or renderer.
+  - Acceptance: the fixture's component-local JSON schema is authoritative; generated TypeScript is deterministic and checked in; strict validation accepts/rejects representative fixtures without mutating them; generation drift fails a check command; unsupported generator semantics are identified before the tool is adopted; existing builds and verification remain green.
+  - Targeted files: root package/lock/scripts and test TypeScript configuration; a private schema tooling/generator module or script; one internal schema contract fixture and generated type under `test/schema/**`; focused unit tests; `DevDocs/adr/0004-schema-governance.md` only if implementation evidence refines a deferred tool choice; and `TODO.md`.
+  - Tests: frozen install, dependency/peer audit, schema meta-validation and strict compilation, deterministic generate/check twice, valid/invalid/default/input-immutability fixture tests, strict quality/build/full regression suite, `git diff --check`, and GitNexus current-index/change/impact/cycle review.
+  - Intended commit: `chore(schema): establish schema contract toolchain`.
+- **2.3b — Pending:** Implement the allowlisted validation/catalog and normalized diagnostic core. Intended commit: `feat(schema): add strict validation and diagnostics core`.
+- **2.3c — Pending:** Implement immutable defaults normalization and sequential v1 migration pipeline. Intended commit: `feat(schema): add immutable normalization and migration pipeline`.
 - **2.4 — Pending:** Implement shared theme token/provider foundation. Intended commit: `feat(theme): establish shared semantic theme contract`.
 - **2.5 — Pending:** Define command, state, and workspace lifecycle contracts. Intended commit: `feat(runtime): define command and workspace lifecycle boundaries`.
 
