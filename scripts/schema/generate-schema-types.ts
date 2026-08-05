@@ -2,10 +2,9 @@ import { readdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import process from 'node:process';
 
-import { compileFromFile } from 'json-schema-to-typescript';
+import { generatedSchemaTypePath, generateSchemaType } from './schema-type-generation';
 
 const schemaRoots = ['packages/ui/src', 'test/schema'];
-const generatedSuffix = '.schema.types.ts';
 
 type Mode = 'check' | 'write';
 
@@ -40,38 +39,6 @@ async function findSchemas(directory: string): Promise<string[]> {
   return nestedSchemas.flat();
 }
 
-function generatedPath(schemaPath: string): string {
-  return schemaPath.replace(/\.schema\.json$/u, generatedSuffix);
-}
-
-async function generate(schemaPath: string): Promise<string> {
-  const generated = await compileFromFile(schemaPath, {
-    $refOptions: {
-      resolve: {
-        http: false,
-      },
-    },
-    additionalProperties: false,
-    bannerComment:
-      '/* eslint-disable */\n/** Generated from the adjacent JSON Schema. Do not edit directly. */',
-    cwd: path.dirname(schemaPath),
-    declareExternallyReferenced: true,
-    strictIndexSignatures: true,
-    style: {
-      printWidth: 100,
-      semi: true,
-      singleQuote: true,
-      tabWidth: 2,
-      trailingComma: 'all',
-      useTabs: false,
-    },
-    unknownAny: true,
-    unreachableDefinitions: false,
-  });
-
-  return generated.replaceAll('\r\n', '\n');
-}
-
 async function run(mode: Mode): Promise<void> {
   const schemaPaths = (
     await Promise.all(schemaRoots.map(async (root) => findSchemas(path.resolve(root))))
@@ -85,8 +52,8 @@ async function run(mode: Mode): Promise<void> {
 
   const driftedFiles: string[] = [];
   for (const schemaPath of schemaPaths) {
-    const outputPath = generatedPath(schemaPath);
-    const expected = await generate(schemaPath);
+    const outputPath = generatedSchemaTypePath(schemaPath);
+    const expected = await generateSchemaType(schemaPath);
 
     if (mode === 'write') {
       await writeFile(outputPath, expected, 'utf8');

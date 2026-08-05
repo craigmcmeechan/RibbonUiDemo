@@ -14,6 +14,8 @@ export default defineConfig({
         'packages/ui/src/schema/**/*.ts',
         'packages/ui/src/runtime/**/*.ts',
         'packages/ui/src/theme/**/*.{ts,tsx}',
+        'scripts/components/component-tooling.ts',
+        'scripts/schema/schema-type-generation.ts',
         'test/harness/HarnessFixture.tsx',
       ],
       provider: 'v8',

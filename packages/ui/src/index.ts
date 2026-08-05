@@ -1,3 +1,4 @@
+export * from './components';
 export * from './runtime';
 export * from './schema';
 export * from './theme';
