@@ -18,4 +18,6 @@ The legacy `legacy-editor-claude-design-template` directory is intentionally out
 
 ## Exceptions
 
-No compiler-option exceptions are approved at this stage. Any future exception must identify its project, option, reason, removal condition, and owning sub-step in this ADR or a superseding decision record.
+`tsconfig.test.json` enables `skipLibCheck` for third-party Storybook/Vitest/Playwright declaration files. TypeScript 6 otherwise reports errors inside transitive declarations that the project does not own, including `ast-types` imports under `isolatedModules`; project-authored test, story, and tooling source remains fully checked. Remove this exception when the installed upstream declarations pass the shared contract. Library and application projects retain `skipLibCheck: false`.
+
+Any future exception must identify its project, option, reason, removal condition, and owning sub-step in this ADR or a superseding decision record.

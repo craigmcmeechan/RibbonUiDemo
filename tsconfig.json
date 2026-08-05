@@ -10,6 +10,9 @@
     },
     {
       "path": "./apps/crm-workspace"
+    },
+    {
+      "path": "./tsconfig.test.json"
     }
   ]
 }

@@ -1,0 +1,23 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "composite": true,
+    "noEmit": true,
+    "skipLibCheck": true,
+    "tsBuildInfoFile": "./node_modules/.cache/typescript/test-harness.tsbuildinfo",
+    "types": ["node", "vitest/globals"]
+  },
+  "include": [
+    ".storybook/**/*.ts",
+    "e2e/**/*.ts",
+    "test/**/*.ts",
+    "test/**/*.tsx",
+    "*.config.ts",
+    "vitest.setup.ts"
+  ],
+  "references": [
+    {
+      "path": "./packages/ui"
+    }
+  ]
+}

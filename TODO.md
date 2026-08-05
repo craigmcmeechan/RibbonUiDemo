@@ -2,7 +2,7 @@
 
 - Plan: `docs/plans/2026-08-05-gitnexus-plan-schema-driven-crm-library.md`
 - Branch: `feature/schema-ui-library-v1`
-- Active sub-step: **1.4 — Establish unit, Storybook, E2E, visual, and CI harnesses**
+- Active sub-step: **2.1 — Freeze legacy characterization and migration criteria**
 - Status: In progress
 
 ## Documentation and activation
@@ -33,11 +33,22 @@
   - Tests: frozen install, lint, format check, combined quality gate, root/per-project typechecks, repeated root builds, declaration and HTTP smoke checks, legacy unchanged check, `git diff --check`, and GitNexus current-index/staged detection/impact/cycle review.
   - Verification: frozen install, zero-warning lint, Prettier check, combined quality gate, root/per-project strict typechecks, two consecutive builds, declaration checks, lint-rule coverage inspection, application HTTP smokes, unchanged legacy/plan checks, and diff checks passed. TypeScript was aligned from 7.0.2 to 6.0.3 because `typescript-eslint` 8.66 officially supports versions below 6.1. GitNexus staged detection reported low risk with no affected process, cycle analysis was clean, and the config helper had one expected same-file caller at low impact.
   - Commit: `chore(quality): add shared lint and formatting gates`.
-- **1.4 — In progress:** Establish unit, Storybook, E2E, visual, and CI harnesses. Intended commit: `test(tooling): establish UI verification harnesses`.
+- **1.4 — Completed:** Establish unit, Storybook, E2E, visual, and CI harnesses.
+  - Scope: install/configure Vitest unit coverage, Testing Library, Storybook 10 with Vite/Vitest/a11y, Playwright Chromium E2E and local visual baselines, one internal non-public harness fixture across those layers, a Windows/Ubuntu verification matrix, and an ADR recording conservative initial coverage/browser/baseline ownership. Do not add production components or behavior.
+  - Acceptance: the accessible harness fixture passes unit coverage, Storybook interaction and a11y tests, static Storybook build, browser E2E, and a committed local visual comparison; the Editor app has an E2E smoke; canonical root scripts run every layer; CI encodes the same gates and publishes failure artifacts.
+  - Targeted files: root package/lock/TypeScript/ESLint/ignore configuration; `vitest.config.ts`, `vitest.setup.ts`, `.storybook/**`, `test/harness/**`, `e2e/**`, Playwright configs/baselines, `.github/workflows/ci.yml`, `.gitattributes`, `DevDocs/adr/0003-verification-harness.md`, and `TODO.md`.
+  - Tests: frozen install, quality/typecheck/build, unit and coverage, Storybook browser interaction/a11y tests, Storybook static build, Chromium E2E, local visual regression, effective config/source scans, `git diff --check`, and GitNexus current-index/staged detection/impact/cycle review.
+  - Verification: frozen install, strict quality/typecheck, all package/application builds, unit coverage (100% for the internal fixture), static Storybook build, Storybook browser interaction plus failing-on-violation accessibility checks, Editor/Storybook Chromium E2E, reviewed Windows Chromium baseline generation and comparison, unchanged legacy/plan checks, and diff checks passed. GitNexus indexed the exact working tree with the PDG layer, reported no import cycles, classified the tracked change set as low risk with no affected process, and found one expected direct unit-test caller of the internal fixture at low impact; direct source review also confirmed the story and E2E consumers that the graph did not surface.
+  - Commit: `test(tooling): establish UI verification harnesses`.
 
 ## Phase 2 — Reusable foundation contracts
 
-- **2.1 — Pending:** Freeze legacy characterization and migration criteria. Intended commit: `test(editor): capture legacy migration baselines`.
+- **2.1 — In progress:** Freeze legacy characterization and migration criteria.
+  - Scope: create deterministic, scrubbed characterization fixtures and a migration-parity checklist for the unchanged legacy demo covering theme switching, ribbon tabs and selection preservation, panels, editable content, zoom/status counts, Backstage, and dialogs. Record deprecated or unsupported browser behavior without refactoring the legacy application.
+  - Acceptance: each required legacy behavior has source-backed expectations and a reproducible automated or explicitly manual scenario; screenshots are stable, reviewed, and free of sensitive data; browser-global and unsupported-browser constraints are documented; the new Editor placeholder and legacy reference remain behaviorally unchanged.
+  - Targeted files: characterization tests/fixtures and baselines outside `legacy-editor-claude-design-template/**`, test-harness configuration required to serve the legacy reference, one focused DevDocs migration-parity record, and `TODO.md`.
+  - Tests: deterministic legacy static-server smoke and characterization scenarios, baseline generation/comparison where appropriate, existing `pnpm verify`, source-backed scenario review, unchanged legacy source check, `git diff --check`, and GitNexus current-index/change/impact/cycle review.
+  - Intended commit: `test(editor): capture legacy migration baselines`.
 - **2.2 — Pending:** Decide schema governance and synchronization. Intended commit: `docs(schema): define versioned component contract governance`.
 - **2.3 — Pending:** Implement validation, diagnostics, and schema composition core. Intended commit: `feat(schema): add versioned validation and diagnostics core`.
 - **2.4 — Pending:** Implement shared theme token/provider foundation. Intended commit: `feat(theme): establish shared semantic theme contract`.

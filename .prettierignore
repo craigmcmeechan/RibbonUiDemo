@@ -3,9 +3,11 @@ legacy-editor-claude-design-template/
 node_modules/
 dist/
 coverage/
+storybook-static/
+playwright-report/
+test-results/
 pnpm-lock.yaml
 docs/plans/
 *.tsbuildinfo
 **/*.d.ts
 **/__snapshots__/
-**/visual-baselines/

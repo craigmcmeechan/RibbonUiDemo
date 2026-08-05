@@ -6,6 +6,13 @@ import tseslint from 'typescript-eslint';
 
 const typedSourceFiles = ['apps/*/src/**/*.{ts,tsx}', 'packages/*/src/**/*.{ts,tsx}'];
 const typescriptConfigFiles = ['apps/*/*.config.ts', 'packages/*/*.config.ts'];
+const testAndToolingFiles = [
+  '.storybook/**/*.ts',
+  'e2e/**/*.ts',
+  'test/**/*.{ts,tsx}',
+  '*.config.ts',
+  'vitest.setup.ts',
+];
 
 const scopedConfigs = (configs, files) => configs.map((config) => ({ ...config, files }));
 
@@ -17,6 +24,9 @@ export default tseslint.config(
       '**/node_modules/**',
       '**/dist/**',
       '**/coverage/**',
+      '**/storybook-static/**',
+      '**/playwright-report/**',
+      '**/test-results/**',
       '**/*.d.ts',
       '**/*.tsbuildinfo',
       '**/__snapshots__/**',
@@ -31,6 +41,7 @@ export default tseslint.config(
     },
   },
   ...scopedConfigs(tseslint.configs.strictTypeChecked, typedSourceFiles),
+  ...scopedConfigs(tseslint.configs.strictTypeChecked, testAndToolingFiles),
   {
     files: typedSourceFiles,
     languageOptions: {
@@ -45,6 +56,19 @@ export default tseslint.config(
     },
     rules: {
       ...reactHooks.configs.flat.recommended.rules,
+    },
+  },
+  {
+    files: testAndToolingFiles,
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+        ...globals.node,
+      },
+      parserOptions: {
+        project: './tsconfig.test.json',
+        tsconfigRootDir: import.meta.dirname,
+      },
     },
   },
   {
