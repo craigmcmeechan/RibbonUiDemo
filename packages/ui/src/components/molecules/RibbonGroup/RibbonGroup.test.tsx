@@ -1,3 +1,6 @@
+import { readFileSync } from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 
@@ -41,5 +44,12 @@ describe('RibbonGroup', () => {
       </RibbonThemeProvider>,
     );
     expect(group.parentElement).toHaveAttribute('data-ribbon-ui-theme', 'modern-dark');
+  });
+
+  it('locks the group body to a fixed common height regardless of control mix', () => {
+    const here = path.dirname(fileURLToPath(import.meta.url));
+    const css = readFileSync(path.resolve(here, 'RibbonGroup.css'), 'utf8');
+    expect(css).toMatch(/\.ribbon-ui-ribbon-group__body\s*{[^}]*height:\s*4\.5rem/);
+    expect(css).toContain('overflow: visible');
   });
 });

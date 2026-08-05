@@ -11,7 +11,8 @@
   align-items: center;
   flex: 1 1 auto;
   gap: 0.25rem;
-  min-height: 4.5rem;
+  height: 4.5rem;
+  overflow: visible;
 }
 
 .ribbon-ui-ribbon-group__label {
