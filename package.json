@@ -13,6 +13,13 @@
     "build:editor": "pnpm --filter @ribbon-ui/ui build && pnpm --filter @ribbon-ui/editor-demo build",
     "build:crm": "pnpm --filter @ribbon-ui/ui build && pnpm --filter @ribbon-ui/crm-workspace build",
     "dev:editor": "pnpm --filter @ribbon-ui/ui build && pnpm --filter @ribbon-ui/editor-demo dev",
-    "dev:crm": "pnpm --filter @ribbon-ui/ui build && pnpm --filter @ribbon-ui/crm-workspace dev"
+    "dev:crm": "pnpm --filter @ribbon-ui/ui build && pnpm --filter @ribbon-ui/crm-workspace dev",
+    "typecheck": "tsc --build --force --pretty false",
+    "typecheck:ui": "tsc --build packages/ui/tsconfig.json --force --pretty false",
+    "typecheck:editor": "tsc --build apps/editor-demo/tsconfig.json --force --pretty false",
+    "typecheck:crm": "tsc --build apps/crm-workspace/tsconfig.json --force --pretty false"
+  },
+  "devDependencies": {
+    "typescript": "^7.0.2"
   }
 }

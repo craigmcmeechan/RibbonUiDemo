@@ -2,7 +2,7 @@
 
 - Plan: `docs/plans/2026-08-05-gitnexus-plan-schema-driven-crm-library.md`
 - Branch: `feature/schema-ui-library-v1`
-- Active sub-step: **1.2 — Enforce shared strict TypeScript contracts**
+- Active sub-step: **1.3 — Add shared ESLint and Prettier gates**
 - Status: In progress
 
 ## Documentation and activation
@@ -19,8 +19,14 @@
   - Tests: `pnpm install --frozen-lockfile`, `pnpm build`, direct package/app builds, production-bundle HTTP smoke checks, legacy static-server HTTP smoke check, dependency-boundary source scan, `git diff --check`, and GitNexus current-index/change/impact review.
   - Verification: all listed checks passed. GitNexus branch index was current with no import cycles; staged detection reported low risk, and both app entry-point impact checks reported one expected direct caller. The graph did not resolve cross-package imports of the neutral UI export, so the two application imports and the absence of forbidden library imports were also verified directly in source.
   - Commit: `chore(tooling): bootstrap TypeScript workspace boundaries`.
-- **1.2 — In progress:** Enforce shared strict TypeScript contracts. Intended commit: `chore(types): enforce strict shared TypeScript checks`.
-- **1.3 — Pending:** Add shared ESLint and Prettier gates. Intended commit: `chore(quality): add shared lint and formatting gates`.
+- **1.2 — Completed:** Enforce shared strict TypeScript contracts.
+  - Scope: add a root solution `tsconfig.json`, one shared strict `tsconfig.base.json`, project references from both apps to `packages/ui`, declaration-safe UI build settings, centralized TypeScript tooling, and an ADR documenting the contract and legacy exclusion. Do not change application behavior.
+  - Acceptance: every new app/library project extends the shared contract; root typecheck covers the complete project graph; the UI emits ESM and public declarations on clean and repeated builds; strict public-API options remain enabled without suppressions; only the legacy reference directory remains outside TypeScript coverage.
+  - Targeted files: `package.json`, `pnpm-lock.yaml`, `.gitignore`, `tsconfig.json`, `tsconfig.base.json`, `DevDocs/adr/0002-typescript-contracts.md`, `apps/{editor-demo,crm-workspace}/{package.json,tsconfig.json}`, and `packages/ui/{package.json,tsconfig.json}`.
+  - Tests: frozen install, root and per-project forced typechecks, root and direct builds repeated twice, declaration-content checks, no-JavaScript/new-config source scan, production-bundle HTTP smoke checks, `git diff --check`, and GitNexus current-index/staged detection/impact/cycle review.
+  - Verification: all listed checks passed without source suppressions. The effective UI config retained every recorded strict flag; the root graph and each project forced typechecked; two consecutive builds retained ESM and declaration outputs; bundle HTTP smokes passed; legacy source remained unchanged. GitNexus staged detection reported low risk and no affected process, import-cycle analysis was clean, and pre-change entry-point impacts were low; compiler/config blast radius was verified through the full forced project graph because GitNexus does not model `tsconfig` semantics.
+  - Commit: `chore(types): enforce strict shared TypeScript checks`.
+- **1.3 — In progress:** Add shared ESLint and Prettier gates. Intended commit: `chore(quality): add shared lint and formatting gates`.
 - **1.4 — Pending:** Establish unit, Storybook, E2E, visual, and CI harnesses. Intended commit: `test(tooling): establish UI verification harnesses`.
 
 ## Phase 2 — Reusable foundation contracts

@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "files": [],
+  "references": [
+    {
+      "path": "./packages/ui"
+    },
+    {
+      "path": "./apps/editor-demo"
+    },
+    {
+      "path": "./apps/crm-workspace"
+    }
+  ]
+}
