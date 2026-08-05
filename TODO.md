@@ -2,7 +2,7 @@
 
 - Plan: `docs/plans/2026-08-05-gitnexus-plan-schema-driven-crm-library.md`
 - Branch: `feature/schema-ui-library-v1`
-- Active sub-step: **1.1 — Decide topology and bootstrap pnpm/Vite workspaces**
+- Active sub-step: **1.2 — Enforce shared strict TypeScript contracts**
 - Status: In progress
 
 ## Documentation and activation
@@ -12,8 +12,14 @@
 
 ## Phase 1 — TypeScript workspace and quality foundation
 
-- **1.1 — In progress:** Decide topology and bootstrap pnpm/Vite workspaces. Intended commit: `chore(tooling): bootstrap TypeScript workspace boundaries`.
-- **1.2 — Pending:** Enforce shared strict TypeScript contracts. Intended commit: `chore(types): enforce strict shared TypeScript checks`.
+- **1.1 — Completed:** Decide topology and bootstrap pnpm/Vite workspaces.
+  - Scope: add the root pnpm 11 workspace, private Editor/CRM Vite app skeletons, the publishable `@ribbon-ui/ui` TypeScript library boundary, a generated lockfile, and an ADR covering topology, publication, peer range, output format, and dependency direction. Preserve the browser-global legacy demo unchanged.
+  - Acceptance: both apps render a minimal placeholder and consume a neutral export through the `@ribbon-ui/ui` public barrel; the library emits ESM plus declarations; root install/build succeeds; no library import targets an app or optional integration; the legacy HTML and source remain intact.
+  - Targeted files: `package.json`, `pnpm-workspace.yaml`, `pnpm-lock.yaml`, `.gitignore`, `DevDocs/adr/0001-workspace-topology.md`, `apps/{editor-demo,crm-workspace}/**`, and `packages/ui/**`.
+  - Tests: `pnpm install --frozen-lockfile`, `pnpm build`, direct package/app builds, production-bundle HTTP smoke checks, legacy static-server HTTP smoke check, dependency-boundary source scan, `git diff --check`, and GitNexus current-index/change/impact review.
+  - Verification: all listed checks passed. GitNexus branch index was current with no import cycles; staged detection reported low risk, and both app entry-point impact checks reported one expected direct caller. The graph did not resolve cross-package imports of the neutral UI export, so the two application imports and the absence of forbidden library imports were also verified directly in source.
+  - Commit: `chore(tooling): bootstrap TypeScript workspace boundaries`.
+- **1.2 — In progress:** Enforce shared strict TypeScript contracts. Intended commit: `chore(types): enforce strict shared TypeScript checks`.
 - **1.3 — Pending:** Add shared ESLint and Prettier gates. Intended commit: `chore(quality): add shared lint and formatting gates`.
 - **1.4 — Pending:** Establish unit, Storybook, E2E, visual, and CI harnesses. Intended commit: `test(tooling): establish UI verification harnesses`.
 

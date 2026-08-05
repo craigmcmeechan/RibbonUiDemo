@@ -1,0 +1,18 @@
+{
+  "name": "ribbon-ui-workspace",
+  "version": "0.0.0",
+  "private": true,
+  "packageManager": "pnpm@11.14.0",
+  "engines": {
+    "node": "^20.19.0 || >=22.12.0",
+    "pnpm": ">=11.14.0 <12"
+  },
+  "scripts": {
+    "build": "pnpm --filter @ribbon-ui/ui build && pnpm --filter @ribbon-ui/editor-demo build && pnpm --filter @ribbon-ui/crm-workspace build",
+    "build:ui": "pnpm --filter @ribbon-ui/ui build",
+    "build:editor": "pnpm --filter @ribbon-ui/ui build && pnpm --filter @ribbon-ui/editor-demo build",
+    "build:crm": "pnpm --filter @ribbon-ui/ui build && pnpm --filter @ribbon-ui/crm-workspace build",
+    "dev:editor": "pnpm --filter @ribbon-ui/ui build && pnpm --filter @ribbon-ui/editor-demo dev",
+    "dev:crm": "pnpm --filter @ribbon-ui/ui build && pnpm --filter @ribbon-ui/crm-workspace dev"
+  }
+}
