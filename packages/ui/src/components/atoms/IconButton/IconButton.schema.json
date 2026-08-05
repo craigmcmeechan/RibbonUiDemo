@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ribbon-ui:schema:component:icon-button:1.0.0",
+  "title": "IconButtonConfig",
+  "description": "Serializable configuration for the accessible RibbonUI icon button atom.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "label", "icon"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[a-z][a-z0-9.-]*$",
+      "description": "Stable icon button instance identifier."
+    },
+    "label": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Required accessible name for the icon-only control."
+    },
+    "icon": {
+      "type": "string",
+      "enum": ["save", "undo", "redo", "search", "close", "more"],
+      "description": "Allowlisted built-in icon rendered without arbitrary markup."
+    },
+    "variant": {
+      "type": "string",
+      "enum": ["neutral", "primary"],
+      "default": "neutral",
+      "description": "Semantic visual emphasis of the icon button."
+    },
+    "size": {
+      "type": "string",
+      "enum": ["small", "medium", "large"],
+      "default": "medium",
+      "description": "Explicit control and icon target size."
+    },
+    "disabled": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether native activation and focus participation are disabled."
+    }
+  }
+}

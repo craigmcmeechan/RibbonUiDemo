@@ -20,6 +20,18 @@ test('Button variants, sizes, disabled state, and themes match the reviewed base
   await expect(matrix).toHaveScreenshot('button-all-themes-and-states.png');
 });
 
+test('IconButton icons, sizes, disabled state, and themes match the reviewed baseline', async ({
+  page,
+}) => {
+  await page.goto(
+    '/iframe.html?id=components-atoms-iconbutton--all-themes-and-states&viewMode=story',
+  );
+
+  const matrix = page.locator('.ribbon-ui-icon-button-story-grid');
+  await expect(matrix.getByRole('button')).toHaveCount(33);
+  await expect(matrix).toHaveScreenshot('icon-button-all-themes-and-states.png');
+});
+
 for (const theme of [
   {
     id: 'foundation-theme-provider--modern-light',

@@ -1,0 +1,32 @@
+.ribbon-ui-icon-button-story-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(13rem, 1fr));
+  gap: 1rem;
+}
+
+.ribbon-ui-icon-button-story-theme {
+  display: grid;
+  gap: 0.75rem;
+  padding: 1rem;
+  color: var(--ribbon-ui-text-primary);
+  background: var(--ribbon-ui-surface-app);
+}
+
+.ribbon-ui-icon-button-story-theme h2 {
+  margin: 0;
+  font: inherit;
+  font-weight: 650;
+}
+
+.ribbon-ui-icon-button-story-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+@media (max-width: 52rem) {
+  .ribbon-ui-icon-button-story-grid {
+    grid-template-columns: 1fr;
+  }
+}

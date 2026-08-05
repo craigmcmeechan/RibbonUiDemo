@@ -43,7 +43,7 @@ describe('Button schema', () => {
     });
     expect(input).toEqual({ id: 'save', label: 'Save' });
     expect(result.ok && Object.isFrozen(result.value)).toBe(true);
-    expect(catalogResult.catalog.schemaIds).toEqual([BUTTON_SCHEMA_ID]);
+    expect(catalogResult.catalog.schemaIds).toContain(BUTTON_SCHEMA_ID);
   });
 
   it('keeps callback and DOM bindings outside serialized configuration', () => {
