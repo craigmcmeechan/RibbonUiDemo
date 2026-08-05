@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ribbon-ui:schema:component:text-area:1.0.0",
+  "title": "TextAreaConfig",
+  "description": "Serializable configuration for the RibbonUI text area atom.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[a-z][a-z0-9.-]*$",
+      "description": "Stable text area instance identifier; also the native textarea DOM id."
+    },
+    "value": {
+      "type": "string",
+      "default": "",
+      "description": "Controlled value owned by the host; empty when omitted."
+    },
+    "placeholder": {
+      "type": "string",
+      "description": "Placeholder shown when the value is empty."
+    },
+    "name": {
+      "type": "string",
+      "description": "Form field name for native form submission."
+    },
+    "rows": {
+      "type": "integer",
+      "minimum": 1,
+      "default": 3,
+      "description": "Visible number of text rows."
+    },
+    "cols": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Visible width in average character columns."
+    },
+    "size": {
+      "type": "string",
+      "enum": ["small", "medium", "large"],
+      "default": "medium",
+      "description": "Explicit field density and target size."
+    },
+    "resize": {
+      "type": "string",
+      "enum": ["none", "vertical", "both"],
+      "default": "vertical",
+      "description": "Native resize axis allowed for the field."
+    },
+    "maxLength": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Maximum number of characters accepted by the native textarea."
+    },
+    "disabled": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether native editing and focus participation are disabled."
+    },
+    "readonly": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether the value is readable but not editable."
+    },
+    "required": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether the field must be filled for native form submission."
+    }
+  }
+}

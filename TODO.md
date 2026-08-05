@@ -2,7 +2,7 @@
 
 - Plan: `docs/plans/2026-08-05-gitnexus-plan-schema-driven-crm-library.md`
 - Branch: `feature/schema-ui-library-v1`
-- Active sub-step: **3.3h — Add the schema-backed text area atom**
+- Active sub-step: **3.3i — Add the schema-backed checkbox atom**
 - Status: In progress
 
 ## Documentation and activation
@@ -161,12 +161,18 @@
   - Targeted files: `packages/ui/src/components/atoms/TextInput/**`; atom/component/package barrels; the trusted schema catalog boundary; focused unit/schema/Storybook tests; `TODO.md`; and no application files.
   - Tests: schema meta/strict validation, required/unknown/type/enum/default boundaries, input immutability, generated-type drift, and component-policy checks; config-to-rendering coverage for type/size/disabled/readonly/required/maxLength branches; controlled typing, focus, disabled, aria associations, all-theme, Storybook interaction/a11y, and reviewed visual states; invalid-config safe failure through the catalog; strict quality/build/coverage/full regression; `git diff --check`; and GitNexus current-index/change/impact/cycle review.
   - Intended commit: `feat(atoms): add schema-backed text input behavior`.
+- **3.3h — Completed:** Add the schema-backed text area atom.
+  - Scope: add an independently packaged `TextArea` atom for a multi-line controlled text field, mirroring the TextInput controlled-state precedent. Keep JSON-serializable identity, value, placeholder, name, rows, cols, size, resize, disabled, readonly, required, and maxLength in the component-local schema; keep ariaLabel/ariaDescribedBy/ariaLabelledBy/className and change/focus callbacks in runtime-only props. Do not add validation UI, icons, menus, prefixes/suffixes, or application-specific styling.
+  - Acceptance: `TextArea` has implementation, separate CSS, schema/generated types/authored runtime types, unit/schema tests, comprehensive Storybook documentation, and local/atomic/public barrels; valid schema configuration renders the matching value, rows, cols, size, resize, and disabled/readonly/required/maxLength; invalid configuration cannot reach rendering through the schema-backed path; the field is always controlled, typing requests the next value through onChange, native disabled/readonly/focus-visible and accessible naming are documented and tested; all colors and states use shared semantic tokens.
+  - Targeted files: `packages/ui/src/components/atoms/TextArea/**`; atom/component/package barrels; the trusted schema catalog boundary; focused unit/schema/Storybook tests; `TODO.md`; and no application files.
+  - Tests: schema meta/strict validation, required/unknown/type/enum/default/int boundaries, input immutability, generated-type drift, and component-policy checks; config-to-rendering coverage for size/resize/disabled/readonly/required/rows/cols/maxLength branches; controlled typing, focus, aria associations, all-theme, Storybook interaction/a11y, and reviewed visual states; invalid-config safe failure through the catalog; strict quality/build/coverage/full regression; `git diff --check`; and GitNexus current-index/change/impact/cycle review.
+  - Intended commit: `feat(atoms): add schema-backed text area behavior`.
 - **3.3 — Pending atom roster (see `DevDocs/phase3-component-roster.md`):** Add domain-neutral leaf atoms, one component per bounded sub-step. Message pattern: `feat(atoms): add schema-backed <component> behavior`. Remaining pending atoms, in intended order:
   - **3.3d — Completed:** Label (display). Intended commit: `feat(atoms): add schema-backed label behavior`.
   - **3.3e — Completed:** Icon (display, standalone decorative). Intended commit: `feat(atoms): add schema-backed icon behavior`.
   - **3.3f — Completed:** Badge (display, status pill; neutral/primary tones; success/warning/danger deferred until status tokens). Intended commit: `feat(atoms): add schema-backed badge behavior`.
   - **3.3g — Completed:** TextInput (input). Intended commit: `feat(atoms): add schema-backed text input behavior`.
-  - **3.3h — Pending:** TextArea (input). Intended commit: `feat(atoms): add schema-backed text area behavior`.
+  - **3.3h — Completed:** TextArea (input). Intended commit: `feat(atoms): add schema-backed text area behavior`.
   - **3.3i — Pending:** Checkbox (input). Intended commit: `feat(atoms): add schema-backed checkbox behavior`.
   - **3.3j — Pending:** Radio (input). Intended commit: `feat(atoms): add schema-backed radio behavior`.
   - **3.3k — Pending:** Switch (input). Intended commit: `feat(atoms): add schema-backed switch behavior`.
