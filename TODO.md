@@ -2,7 +2,7 @@
 
 - Plan: `docs/plans/2026-08-05-gitnexus-plan-schema-driven-crm-library.md`
 - Branch: `feature/schema-ui-library-v1`
-- Active sub-step: **4.3 — Complete ribbon keyboard, focus, overflow, and density behavior**
+- Active sub-step: **4.4 — Re-express editor ribbon as workspace configuration**
 - Status: In progress
 
 ## Documentation and activation

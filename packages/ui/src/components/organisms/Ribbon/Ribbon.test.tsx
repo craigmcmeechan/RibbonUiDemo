@@ -81,6 +81,34 @@ describe('Ribbon', () => {
     expect(onRibbonPointerDown).toHaveBeenCalledOnce();
   });
 
+  it('uses roving tabindex so only the active tab is in the tab order', () => {
+    renderRibbon();
+    expect(screen.getByRole('tab', { name: 'Home' })).toHaveAttribute('tabindex', '0');
+    expect(screen.getByRole('tab', { name: 'Insert' })).toHaveAttribute('tabindex', '-1');
+  });
+
+  it('moves focus and auto-activates with ArrowRight/ArrowLeft/Home/End', async () => {
+    const user = userEvent.setup();
+    const onSelectTab = vi.fn();
+    renderRibbon({ onSelectTab });
+    const home = screen.getByRole('tab', { name: 'Home' });
+    home.focus();
+    expect(home).toHaveFocus();
+
+    await user.keyboard('{ArrowRight}');
+    expect(screen.getByRole('tab', { name: 'Insert' })).toHaveFocus();
+    expect(onSelectTab).toHaveBeenLastCalledWith('insert');
+
+    await user.keyboard('{ArrowLeft}');
+    expect(screen.getByRole('tab', { name: 'Home' })).toHaveFocus();
+    expect(onSelectTab).toHaveBeenLastCalledWith('home');
+
+    await user.keyboard('{End}');
+    expect(screen.getByRole('tab', { name: 'Insert' })).toHaveFocus();
+
+    await user.keyboard('{Home}');
+    expect(screen.getByRole('tab', { name: 'Home' })).toHaveFocus();
+  });
   it('stays inside one coherent theme boundary when the host theme changes', () => {
     const { rerender } = renderRibbon();
     expect(

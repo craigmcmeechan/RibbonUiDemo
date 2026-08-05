@@ -26,6 +26,7 @@ export function RibbonTab({
       id={id}
       onClick={onSelect}
       role="tab"
+      tabIndex={active ? 0 : -1}
       type="button"
     >
       {label}
