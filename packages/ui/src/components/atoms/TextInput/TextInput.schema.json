@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ribbon-ui:schema:component:text-input:1.0.0",
+  "title": "TextInputConfig",
+  "description": "Serializable configuration for the RibbonUI text input atom.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[a-z][a-z0-9.-]*$",
+      "description": "Stable text input instance identifier; also the native input DOM id."
+    },
+    "value": {
+      "type": "string",
+      "default": "",
+      "description": "Controlled value owned by the host; empty when omitted."
+    },
+    "placeholder": {
+      "type": "string",
+      "description": "Placeholder shown when the value is empty."
+    },
+    "name": {
+      "type": "string",
+      "description": "Form field name for native form submission."
+    },
+    "size": {
+      "type": "string",
+      "enum": ["small", "medium", "large"],
+      "default": "medium",
+      "description": "Explicit field density and target size."
+    },
+    "inputType": {
+      "type": "string",
+      "enum": ["text", "email", "password", "search", "url"],
+      "default": "text",
+      "description": "Native input type; numeric types are handled by other atoms."
+    },
+    "maxLength": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Maximum number of characters accepted by the native input."
+    },
+    "disabled": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether native editing and focus participation are disabled."
+    },
+    "readonly": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether the value is readable but not editable."
+    },
+    "required": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether the field must be filled for native form submission."
+    }
+  }
+}
