@@ -42,9 +42,15 @@ Any output that changes code, makes a project decision, or claims verification r
 
 - Gemma: zero to three concurrent simple helper tasks.
 - Kimi: zero to two concurrent bounded coding tasks.
+- Qwen3-Coder (qwen34): zero to three concurrent instances. This is the orchestrator model; the orchestrator counts as one of the three.
+- Agents: zero to three concurrent agents in total. This orchestration chat is one agent; the remaining two worker slots may be filled by either two Kimi workers or two additional qwen34 (same-model) instances. Mixing one Kimi and one qwen34 worker is also allowed, but each pool cap still applies (Kimi <= 2, qwen34 <= 3 including the orchestrator).
 - Hosted lead: one integration/review authority for the active sub-step.
 
 Use concurrency only for independent scopes. Do not assign overlapping files, the same TODO sub-step, or dependent outputs concurrently. A lower Codex/session cap still wins if the runtime imposes one. These pool limits are operating policy; the example Codex configuration does not enforce provider-specific pools automatically.
+
+### Safe parallelization for shared-scaffold work
+
+When the active sub-steps share integration files (for example Phase 3 atoms, which all register into the same component catalog and barrel), parallelize only the independent per-component folders. Each worker creates exactly its own component folder and returns the file set plus the catalog entry it needs (schema `$id` and import path); workers must not run `component:scaffold`, edit the shared catalog/barrel files, edit `TODO.md`, or commit. The orchestrator integrates each worker's output into the shared catalog, barrel, and `TODO.md` one at a time, runs the full gate, and creates one focused commit per sub-step. This keeps the independent work parallel while the shared-file merge, verification, GitNexus review, commit, and push stay serial and conflict-free.
 
 ## Worker handoff protocol
 
