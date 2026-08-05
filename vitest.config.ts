@@ -12,6 +12,7 @@ export default defineConfig({
       exclude: ['**/index.ts', '**/*.stories.tsx', '**/*.test.{ts,tsx}'],
       include: [
         'packages/ui/src/schema/**/*.ts',
+        'packages/ui/src/runtime/**/*.ts',
         'packages/ui/src/theme/**/*.{ts,tsx}',
         'test/harness/HarnessFixture.tsx',
       ],
