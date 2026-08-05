@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ribbon-ui:schema:component:popover:1.0.0",
+  "title": "PopoverConfig",
+  "description": "Serializable configuration for the RibbonUI popover primitive.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[a-z][a-z0-9.-]*$",
+      "description": "Stable popover instance identifier."
+    },
+    "placement": {
+      "type": "string",
+      "enum": ["bottom", "top"],
+      "default": "bottom",
+      "description": "Vertical placement relative to the anchor element; horizontal alignment is start-aligned for v1."
+    }
+  }
+}

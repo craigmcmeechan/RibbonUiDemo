@@ -1,0 +1,8 @@
+.ribbon-ui-popover {
+  z-index: 1000;
+  border-radius: var(--ribbon-ui-radius-small);
+  background: var(--ribbon-ui-surface-popover);
+  box-shadow: 0 2px 12px var(--ribbon-ui-shadow-popover);
+  color: var(--ribbon-ui-text-primary);
+  font: inherit;
+}

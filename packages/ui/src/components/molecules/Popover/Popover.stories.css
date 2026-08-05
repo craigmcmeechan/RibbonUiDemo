@@ -1,0 +1,6 @@
+.ribbon-ui-popover-story {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
