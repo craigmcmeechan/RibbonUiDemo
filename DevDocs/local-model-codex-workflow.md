@@ -30,7 +30,7 @@ Gemma does not approve design, code, tests, or commits. Redact secrets, personal
 
 Use `kimi-k2.7-code:cloud` only for bounded, fully specified implementation sub-steps. Give it the minimum required context and no secrets. It may produce a candidate patch and test evidence, but it does not interpret ambiguous requirements, approve architecture, assess security/reliability, run final GitNexus review, or approve a commit.
 
-Kimi has a separate pool of at most three concurrent coding-worker instances. Never exceed three Kimi workers even when Gemma capacity is unused.
+Kimi has a separate pool of at most two concurrent coding-worker instances. Never exceed two Kimi workers even when Gemma capacity is unused.
 
 ### Hosted Codex lead
 
@@ -41,7 +41,7 @@ Any output that changes code, makes a project decision, or claims verification r
 ## Scheduling limits
 
 - Gemma: zero to three concurrent simple helper tasks.
-- Kimi: zero to three concurrent bounded coding tasks.
+- Kimi: zero to two concurrent bounded coding tasks.
 - Hosted lead: one integration/review authority for the active sub-step.
 
 Use concurrency only for independent scopes. Do not assign overlapping files, the same TODO sub-step, or dependent outputs concurrently. A lower Codex/session cap still wins if the runtime imposes one. These pool limits are operating policy; the example Codex configuration does not enforce provider-specific pools automatically.
