@@ -1,5 +1,6 @@
 export * from './atoms';
 export {
+  BADGE_SCHEMA_ID,
   BUTTON_SCHEMA_ID,
   getRibbonComponentSchemaCatalog,
   ICON_BUTTON_SCHEMA_ID,

@@ -2,8 +2,8 @@
 
 - Plan: `docs/plans/2026-08-05-gitnexus-plan-schema-driven-crm-library.md`
 - Branch: `feature/schema-ui-library-v1`
-- Active sub-step: **3.3f — Add the schema-backed badge atom**
-- Status: Pending — 3.3e complete; next atom sub-step 3.3f (Badge)
+- Active sub-step: **3.3g — Add the schema-backed text input atom**
+- Status: Pending — 3.3f complete; next atom sub-step 3.3g (TextInput)
 
 ## Documentation and activation
 
@@ -149,10 +149,16 @@
   - Targeted files: `packages/ui/src/components/atoms/Icon/**`; atom/component/package barrels; the trusted schema catalog boundary; focused unit/schema/Storybook tests; `TODO.md`; and no application files.
   - Tests: schema meta/strict validation, required/unknown/type/enum/default boundaries, input immutability, generated-type drift, and component-policy checks; config-to-rendering coverage for every icon and size branch; decorative `aria-hidden`, all-theme, density, Storybook interaction/a11y, and reviewed visual states; invalid-config safe failure through the catalog; strict quality/build/coverage/full regression; `git diff --check`; and GitNexus current-index/change/impact/cycle review.
   - Intended commit: `feat(atoms): add schema-backed icon behavior`.
+- **3.3f — Completed:** Add the schema-backed badge atom.
+  - Scope: add an independently packaged `Badge` atom for one compact status pill, using the shared theme contract and the trusted component-schema catalog. Keep JSON-serializable identity, visible label, and tone in the component-local schema/generated configuration type; keep the host layout class in runtime-only props. Ship neutral and primary tones from existing semantic tokens and defer success/warning/danger tones until a semantic status-token theme sub-step adds them. Do not add commands, interactive behavior, icons, menus, dismiss buttons, or application-specific styling.
+  - Acceptance: `Badge` has implementation, separate CSS, schema/generated types/authored runtime types, unit/schema tests, comprehensive Storybook documentation, and local/atomic/public barrels; valid schema configuration renders the matching label and tone as a pill; invalid configuration cannot reach rendering through the schema-backed path; the badge reads as visible text without a redundant role; all-theme behavior consumes only shared semantic tokens and meets the 4.5:1 contrast gate; no local color literals.
+  - Targeted files: `packages/ui/src/components/atoms/Badge/**`; atom/component/package barrels; the trusted schema catalog boundary; focused unit/schema/Storybook tests; `TODO.md`; and no application files.
+  - Tests: schema meta/strict validation, required/unknown/type/enum/default boundaries, input immutability, generated-type drift, and component-policy checks; config-to-rendering coverage for neutral and primary tones; visible-text, all-theme, contrast, Storybook interaction/a11y, and reviewed visual states; invalid-config safe failure through the catalog; strict quality/build/coverage/full regression; `git diff --check`; and GitNexus current-index/change/impact/cycle review.
+  - Intended commit: `feat(atoms): add schema-backed badge behavior`.
 - **3.3 — Pending atom roster (see `DevDocs/phase3-component-roster.md`):** Add domain-neutral leaf atoms, one component per bounded sub-step. Message pattern: `feat(atoms): add schema-backed <component> behavior`. Remaining pending atoms, in intended order:
   - **3.3d — Completed:** Label (display). Intended commit: `feat(atoms): add schema-backed label behavior`.
   - **3.3e — Completed:** Icon (display, standalone decorative). Intended commit: `feat(atoms): add schema-backed icon behavior`.
-  - **3.3f — Pending:** Badge (display, status pill). Intended commit: `feat(atoms): add schema-backed badge behavior`.
+  - **3.3f — Completed:** Badge (display, status pill; neutral/primary tones; success/warning/danger deferred until status tokens). Intended commit: `feat(atoms): add schema-backed badge behavior`.
   - **3.3g — Pending:** TextInput (input). Intended commit: `feat(atoms): add schema-backed text input behavior`.
   - **3.3h — Pending:** TextArea (input). Intended commit: `feat(atoms): add schema-backed text area behavior`.
   - **3.3i — Pending:** Checkbox (input). Intended commit: `feat(atoms): add schema-backed checkbox behavior`.

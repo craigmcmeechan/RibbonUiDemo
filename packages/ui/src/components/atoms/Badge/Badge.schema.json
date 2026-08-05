@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ribbon-ui:schema:component:badge:1.0.0",
+  "title": "BadgeConfig",
+  "description": "Serializable configuration for the RibbonUI badge atom.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "label"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[a-z][a-z0-9.-]*$",
+      "description": "Stable badge instance identifier."
+    },
+    "label": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Visible text content of the badge."
+    },
+    "tone": {
+      "type": "string",
+      "enum": ["neutral", "primary"],
+      "default": "neutral",
+      "description": "Semantic tone of the badge; success/warning/danger are deferred until status tokens exist."
+    }
+  }
+}

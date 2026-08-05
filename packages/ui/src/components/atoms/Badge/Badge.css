@@ -1,0 +1,20 @@
+.ribbon-ui-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.0625rem 0.5rem;
+  border: 1px solid var(--ribbon-ui-border-control);
+  border-radius: 999px;
+  color: var(--ribbon-ui-text-primary);
+  background: var(--ribbon-ui-surface-toolbar);
+  font: inherit;
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+.ribbon-ui-badge[data-tone='primary'] {
+  border-color: var(--ribbon-ui-accent);
+  color: var(--ribbon-ui-control-selected-text);
+  background: var(--ribbon-ui-control-selected);
+}
