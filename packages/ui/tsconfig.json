@@ -10,6 +10,11 @@
     "outDir": "dist",
     "tsBuildInfoFile": "dist/ui.tsbuildinfo"
   },
-  "include": ["src"],
-  "exclude": ["src/**/*.test.ts", "src/**/*.test.tsx"]
+  "include": ["src", "../../types/**/*.d.ts"],
+  "exclude": [
+    "src/**/*.stories.ts",
+    "src/**/*.stories.tsx",
+    "src/**/*.test.ts",
+    "src/**/*.test.tsx"
+  ]
 }

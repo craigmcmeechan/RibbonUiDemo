@@ -12,9 +12,12 @@
     "e2e/**/*.ts",
     "packages/*/src/**/*.test.ts",
     "packages/*/src/**/*.test.tsx",
+    "packages/*/src/**/*.stories.ts",
+    "packages/*/src/**/*.stories.tsx",
     "scripts/**/*.ts",
     "test/**/*.ts",
     "test/**/*.tsx",
+    "types/**/*.d.ts",
     "*.config.ts",
     "vitest.setup.ts"
   ],

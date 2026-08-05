@@ -5,6 +5,7 @@ export default defineConfig({
   plugins: [react()],
   build: {
     lib: {
+      cssFileName: 'ribbon-ui',
       entry: 'src/index.ts',
       formats: ['es'],
       fileName: 'index',

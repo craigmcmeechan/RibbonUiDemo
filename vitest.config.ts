@@ -10,7 +10,11 @@ export default defineConfig({
   test: {
     coverage: {
       exclude: ['**/index.ts', '**/*.stories.tsx', '**/*.test.{ts,tsx}'],
-      include: ['packages/ui/src/schema/**/*.ts', 'test/harness/HarnessFixture.tsx'],
+      include: [
+        'packages/ui/src/schema/**/*.ts',
+        'packages/ui/src/theme/**/*.{ts,tsx}',
+        'test/harness/HarnessFixture.tsx',
+      ],
       provider: 'v8',
       reporter: ['text', 'json-summary', 'html'],
       reportsDirectory: 'coverage',

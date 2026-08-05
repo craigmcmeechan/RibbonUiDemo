@@ -1,0 +1,33 @@
+.theme-contract-demo {
+  display: grid;
+  width: min(42rem, 90vw);
+  gap: 0.75rem;
+  padding: 1rem;
+}
+
+.theme-contract-demo__header,
+.theme-contract-demo__panel,
+.theme-contract-demo__content {
+  padding: 0.875rem;
+  border: 1px solid var(--ribbon-ui-border-control);
+  border-radius: var(--ribbon-ui-radius-small);
+}
+
+.theme-contract-demo__header {
+  background: var(--ribbon-ui-surface-header);
+  color: var(--ribbon-ui-text-header);
+}
+
+.theme-contract-demo__panel {
+  background: var(--ribbon-ui-surface-panel);
+  color: var(--ribbon-ui-text-primary);
+}
+
+.theme-contract-demo__content {
+  background: var(--ribbon-ui-surface-toolbar);
+  color: var(--ribbon-ui-text-primary);
+}
+
+.theme-contract-demo__content a {
+  color: var(--ribbon-ui-text-link);
+}

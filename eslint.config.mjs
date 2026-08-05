@@ -6,11 +6,13 @@ import tseslint from 'typescript-eslint';
 
 const typedSourceFiles = ['apps/*/src/**/*.{ts,tsx}', 'packages/*/src/**/*.{ts,tsx}'];
 const colocatedTestFiles = ['packages/*/src/**/*.test.{ts,tsx}'];
+const colocatedStoryFiles = ['packages/*/src/**/*.stories.{ts,tsx}'];
 const typescriptConfigFiles = ['apps/*/*.config.ts', 'packages/*/*.config.ts'];
 const testAndToolingFiles = [
   '.storybook/**/*.ts',
   'e2e/**/*.ts',
   'packages/*/src/**/*.test.{ts,tsx}',
+  'packages/*/src/**/*.stories.{ts,tsx}',
   'scripts/**/*.ts',
   'test/**/*.{ts,tsx}',
   '*.config.ts',
@@ -45,11 +47,14 @@ export default tseslint.config(
       globals: globals.node,
     },
   },
-  ...scopedConfigs(tseslint.configs.strictTypeChecked, typedSourceFiles, colocatedTestFiles),
+  ...scopedConfigs(tseslint.configs.strictTypeChecked, typedSourceFiles, [
+    ...colocatedTestFiles,
+    ...colocatedStoryFiles,
+  ]),
   ...scopedConfigs(tseslint.configs.strictTypeChecked, testAndToolingFiles),
   {
     files: typedSourceFiles,
-    ignores: colocatedTestFiles,
+    ignores: [...colocatedTestFiles, ...colocatedStoryFiles],
     languageOptions: {
       globals: globals.browser,
       parserOptions: {

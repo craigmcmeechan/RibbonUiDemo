@@ -1,0 +1,8 @@
+.ribbon-ui-theme {
+  min-width: 0;
+  border-color: var(--ribbon-ui-border-control);
+  border-radius: var(--ribbon-ui-radius-small);
+  background: var(--ribbon-ui-surface-canvas);
+  color: var(--ribbon-ui-text-primary);
+  font-family: var(--ribbon-ui-font-family);
+}
