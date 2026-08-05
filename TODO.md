@@ -1,8 +1,13 @@
 # Project TODO
 
-- Plan: None
+- Plan: Record the user-defined reusable-shell target architecture.
 - Active sub-step: None
-- Status: Idle — no planned implementation work is active.
+- Status: Completed
+
+## Ordered steps
+
+1. Document the target architecture without mixing it with current-state analysis or implementation planning.
+   - **1.1 — Completed:** Added the reusable-shell target note and CRM product-direction descriptor; kept Spreadsheet illustrative only. Documentation scope, terminology, Markdown, whitespace, and application-code isolation checks passed. GitNexus reported two documentation files, zero changed symbols, and zero affected processes; symbol impact analysis was not applicable. Commit: this commit (`docs: record reusable shell and CRM workspace target`). Push: not attempted because HEAD is detached and no remote is configured.
 
 ## Tracking rules
 
