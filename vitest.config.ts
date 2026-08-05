@@ -9,8 +9,8 @@ const repositoryRoot = path.dirname(fileURLToPath(import.meta.url));
 export default defineConfig({
   test: {
     coverage: {
-      exclude: ['**/*.stories.tsx', '**/*.test.tsx'],
-      include: ['test/harness/HarnessFixture.tsx'],
+      exclude: ['**/index.ts', '**/*.stories.tsx', '**/*.test.{ts,tsx}'],
+      include: ['packages/ui/src/schema/**/*.ts', 'test/harness/HarnessFixture.tsx'],
       provider: 'v8',
       reporter: ['text', 'json-summary', 'html'],
       reportsDirectory: 'coverage',
@@ -26,7 +26,7 @@ export default defineConfig({
         extends: true,
         test: {
           environment: 'jsdom',
-          include: ['test/**/*.test.{ts,tsx}'],
+          include: ['packages/ui/src/**/*.test.{ts,tsx}', 'test/**/*.test.{ts,tsx}'],
           name: 'unit',
           setupFiles: ['./vitest.setup.ts'],
         },

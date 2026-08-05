@@ -5,17 +5,20 @@ import globals from 'globals';
 import tseslint from 'typescript-eslint';
 
 const typedSourceFiles = ['apps/*/src/**/*.{ts,tsx}', 'packages/*/src/**/*.{ts,tsx}'];
+const colocatedTestFiles = ['packages/*/src/**/*.test.{ts,tsx}'];
 const typescriptConfigFiles = ['apps/*/*.config.ts', 'packages/*/*.config.ts'];
 const testAndToolingFiles = [
   '.storybook/**/*.ts',
   'e2e/**/*.ts',
+  'packages/*/src/**/*.test.{ts,tsx}',
   'scripts/**/*.ts',
   'test/**/*.{ts,tsx}',
   '*.config.ts',
   'vitest.setup.ts',
 ];
 
-const scopedConfigs = (configs, files) => configs.map((config) => ({ ...config, files }));
+const scopedConfigs = (configs, files, ignores = []) =>
+  configs.map((config) => ({ ...config, files, ignores }));
 
 export default tseslint.config(
   {
@@ -42,10 +45,11 @@ export default tseslint.config(
       globals: globals.node,
     },
   },
-  ...scopedConfigs(tseslint.configs.strictTypeChecked, typedSourceFiles),
+  ...scopedConfigs(tseslint.configs.strictTypeChecked, typedSourceFiles, colocatedTestFiles),
   ...scopedConfigs(tseslint.configs.strictTypeChecked, testAndToolingFiles),
   {
     files: typedSourceFiles,
+    ignores: colocatedTestFiles,
     languageOptions: {
       globals: globals.browser,
       parserOptions: {
