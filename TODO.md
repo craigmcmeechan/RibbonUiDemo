@@ -2,7 +2,7 @@
 
 - Plan: `docs/plans/2026-08-05-gitnexus-plan-schema-driven-crm-library.md`
 - Branch: `feature/schema-ui-library-v1`
-- Active sub-step: **3.3m — Add the schema-backed slider atom**
+- Active sub-step: **3.3n — Add the schema-backed spinner atom**
 - Status: In progress
 
 ## Documentation and activation
@@ -191,6 +191,12 @@
   - Targeted files: `packages/ui/src/components/atoms/Select/**`; atom/component/package barrels; the trusted schema catalog boundary; focused unit/schema/Storybook tests; `TODO.md`; and no application files.
   - Tests: schema meta/strict validation, required/unknown/type/enum/default/array boundaries, input immutability, generated-type drift, and component-policy checks; config-to-rendering coverage for placeholder/size/disabled/required/option branches; controlled selection, focus, aria associations, all-theme, Storybook interaction/a11y, and reviewed visual states; invalid-config safe failure through the catalog; strict quality/build/coverage/full regression; `git diff --check`; and GitNexus current-index/change/impact/cycle review.
   - Intended commit: `feat(atoms): add schema-backed select behavior`.
+- **3.3m — Completed:** Add the schema-backed slider atom.
+  - Scope: add an independently packaged `Slider` atom for a single-value range control, using native `<input type="range">` semantics, the shared theme contract, and the trusted component-schema catalog. Keep JSON-serializable identity, controlled value, min, max, step, size, disabled, and name in the component-local schema; keep change/focus callbacks and ARIA DOM bindings in runtime-only props. Follow the controlled-state precedent (host owns `value`). Do not add command ownership, tick marks, range thumbs (two-handle), icons, menus, or application-specific styling.
+  - Acceptance: `Slider` has implementation, separate CSS, schema/generated types/authored runtime types, unit/schema tests, comprehensive Storybook documentation, and local/atomic/public barrels; valid schema configuration renders the matching value, min, max, step, size, and disabled; invalid configuration cannot reach rendering through the schema-backed path; arrow-key and pointer changes request the next value through onChange without internally owning state; native disabled, focus-visible, accessible naming, all-theme, and density behavior are documented and tested; all colors and states use shared semantic tokens.
+  - Targeted files: `packages/ui/src/components/atoms/Slider/**`; atom/component/package barrels; the trusted schema catalog boundary; focused unit/schema/Storybook tests; `TODO.md`; and no application files.
+  - Tests: schema meta/strict validation, required/unknown/type/enum/default boundaries, input immutability, generated-type drift, and component-policy checks; config-to-rendering coverage for value/min/max/step/size/disabled branches; controlled change via arrow keys and pointer, focus, disabled, aria associations, all-theme, Storybook interaction/a11y, and reviewed visual states; invalid-config safe failure through the catalog; strict quality/build/coverage/full regression; `git diff --check`; and GitNexus current-index/change/impact/cycle review.
+  - Intended commit: `feat(atoms): add schema-backed slider behavior`.
 - **3.3 — Pending atom roster (see `DevDocs/phase3-component-roster.md`):** Add domain-neutral leaf atoms, one component per bounded sub-step. Message pattern: `feat(atoms): add schema-backed <component> behavior`. Remaining pending atoms, in intended order:
   - **3.3d — Completed:** Label (display). Intended commit: `feat(atoms): add schema-backed label behavior`.
   - **3.3e — Completed:** Icon (display, standalone decorative). Intended commit: `feat(atoms): add schema-backed icon behavior`.
@@ -201,7 +207,7 @@
   - **3.3j — Completed:** Radio (input). Intended commit: `feat(atoms): add schema-backed radio behavior`.
   - **3.3k — Completed:** Switch (input). Intended commit: `feat(atoms): add schema-backed switch behavior`.
   - **3.3l — Completed:** Select (input, native wrapper). Intended commit: `feat(atoms): add schema-backed select behavior`.
-  - **3.3m — Pending:** Slider (input). Intended commit: `feat(atoms): add schema-backed slider behavior`.
+  - **3.3m — Completed:** Slider (input). Intended commit: `feat(atoms): add schema-backed slider behavior`.
   - **3.3n — Pending:** Spinner (feedback). Intended commit: `feat(atoms): add schema-backed spinner behavior`.
   - **3.3o — Pending:** ColorSwatch (display). Intended commit: `feat(atoms): add schema-backed color swatch behavior`.
   - Interaction primitives (MenuItem/Menu/Dropdown, ComboBox, Tooltip, SplitButton) and ribbon composites are NOT atoms; they build in 3.4 and Phase 4/5.

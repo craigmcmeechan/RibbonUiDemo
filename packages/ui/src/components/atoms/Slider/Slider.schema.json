@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ribbon-ui:schema:component:slider:1.0.0",
+  "title": "SliderConfig",
+  "description": "Serializable configuration for the RibbonUI slider atom.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[a-z][a-z0-9.-]*$",
+      "description": "Stable slider instance identifier; also the native input DOM id."
+    },
+    "value": {
+      "type": "number",
+      "default": 0,
+      "description": "Controlled numeric value owned by the host."
+    },
+    "min": {
+      "type": "number",
+      "default": 0,
+      "description": "Minimum allowed value."
+    },
+    "max": {
+      "type": "number",
+      "default": 100,
+      "description": "Maximum allowed value."
+    },
+    "step": {
+      "type": "number",
+      "default": 1,
+      "minimum": 0,
+      "description": "Step between allowed values; 0 is treated as any by the host."
+    },
+    "name": {
+      "type": "string",
+      "description": "Form field name for native form submission."
+    },
+    "size": {
+      "type": "string",
+      "enum": ["small", "medium", "large"],
+      "default": "medium",
+      "description": "Explicit control density and target size."
+    },
+    "disabled": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether native activation and focus participation are disabled."
+    }
+  }
+}
