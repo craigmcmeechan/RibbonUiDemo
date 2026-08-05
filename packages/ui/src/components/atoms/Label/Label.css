@@ -1,0 +1,10 @@
+.ribbon-ui-label {
+  display: inline-block;
+  color: var(--ribbon-ui-text-primary);
+  font: inherit;
+  line-height: 1.2;
+}
+
+.ribbon-ui-label[data-variant='strong'] {
+  font-weight: 600;
+}

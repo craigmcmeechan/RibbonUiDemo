@@ -1,0 +1,38 @@
+.ribbon-ui-label-story-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.ribbon-ui-label-story-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.ribbon-ui-label-story-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(11rem, 1fr));
+  gap: 1rem;
+}
+
+.ribbon-ui-label-story-theme {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem;
+  color: var(--ribbon-ui-text-primary);
+  background: var(--ribbon-ui-surface-app);
+}
+
+.ribbon-ui-label-story-theme h2 {
+  margin: 0 0 0.25rem;
+  font: inherit;
+  font-weight: 650;
+}
+
+@media (max-width: 46rem) {
+  .ribbon-ui-label-story-grid {
+    grid-template-columns: 1fr;
+  }
+}

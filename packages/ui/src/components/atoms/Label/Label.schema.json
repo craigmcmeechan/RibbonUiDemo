@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ribbon-ui:schema:component:label:1.0.0",
+  "title": "LabelConfig",
+  "description": "Serializable configuration for the RibbonUI label atom.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "text"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[a-z][a-z0-9.-]*$",
+      "description": "Stable label instance identifier."
+    },
+    "text": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Visible text that supplies the label content and, when bound, the accessible name."
+    },
+    "variant": {
+      "type": "string",
+      "enum": ["default", "strong"],
+      "default": "default",
+      "description": "Semantic emphasis of the label text."
+    }
+  }
+}
