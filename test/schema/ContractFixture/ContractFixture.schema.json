@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ribbon-ui:schema:component:contract-fixture:1.0.0",
+  "title": "ContractFixtureConfig",
+  "description": "Private fixture used to prove the component schema toolchain.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "variant", "content"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Stable fixture instance identifier."
+    },
+    "label": {
+      "type": "string",
+      "minLength": 1,
+      "default": "Fixture",
+      "description": "Optional display label."
+    },
+    "variant": {
+      "type": "string",
+      "enum": ["primary", "secondary"],
+      "default": "primary",
+      "description": "Visual fixture variant."
+    },
+    "density": {
+      "$ref": "#/$defs/density"
+    },
+    "content": {
+      "description": "Discriminated fixture content.",
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "text"],
+          "properties": {
+            "kind": { "const": "text" },
+            "text": { "type": "string", "minLength": 1 }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "icon"],
+          "properties": {
+            "kind": { "const": "icon" },
+            "icon": { "type": "string", "pattern": "^[a-z][a-z0-9-]*$" }
+          }
+        }
+      ]
+    }
+  },
+  "$defs": {
+    "density": {
+      "type": "string",
+      "enum": ["comfortable", "compact"],
+      "default": "comfortable",
+      "description": "Fixture density resolved through a local schema reference."
+    }
+  }
+}

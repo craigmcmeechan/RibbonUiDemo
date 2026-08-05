@@ -3,6 +3,8 @@ packages:
   - 'packages/*'
 allowBuilds:
   esbuild: true
+overrides:
+  tsx: 4.22.5
 peerDependencyRules:
   allowedVersions:
     'react-dom@18.3.1>react': '>=19 <20'

@@ -9,6 +9,7 @@ const typescriptConfigFiles = ['apps/*/*.config.ts', 'packages/*/*.config.ts'];
 const testAndToolingFiles = [
   '.storybook/**/*.ts',
   'e2e/**/*.ts',
+  'scripts/**/*.ts',
   'test/**/*.{ts,tsx}',
   '*.config.ts',
   'vitest.setup.ts',
@@ -27,6 +28,7 @@ export default tseslint.config(
       '**/storybook-static/**',
       '**/playwright-report/**',
       '**/test-results/**',
+      '**/*.schema.types.ts',
       '**/*.d.ts',
       '**/*.tsbuildinfo',
       '**/__snapshots__/**',

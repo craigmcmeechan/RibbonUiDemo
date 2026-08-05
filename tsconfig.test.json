@@ -10,6 +10,7 @@
   "include": [
     ".storybook/**/*.ts",
     "e2e/**/*.ts",
+    "scripts/**/*.ts",
     "test/**/*.ts",
     "test/**/*.tsx",
     "*.config.ts",
