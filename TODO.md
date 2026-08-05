@@ -2,8 +2,8 @@
 
 - Plan: `docs/plans/2026-08-05-gitnexus-plan-schema-driven-crm-library.md`
 - Branch: `feature/schema-ui-library-v1`
-- Active sub-step: **3.3o — Add the schema-backed color swatch atom**
-- Status: In progress
+- Active sub-step: **3.4 — Build accessible popup/dropdown primitives**
+- Status: Pending — Phase 3 atom layer complete; 3.4 (popup/dropdown primitives) next, pending parallelization discussion
 
 ## Documentation and activation
 
@@ -203,6 +203,12 @@
   - Targeted files: `packages/ui/src/components/atoms/Spinner/**`; atom/component/package barrels; the trusted schema catalog boundary; focused unit/schema/Storybook tests; `TODO.md`; and no application files.
   - Tests: schema meta/strict validation, required/unknown/type/enum/default boundaries, input immutability, generated-type drift, and component-policy checks; config-to-rendering coverage for size and label/no-label branches; decorative `aria-hidden` versus `role="status"` accessible-name selection, all-theme, Storybook interaction/a11y, and reviewed visual states; invalid-config safe failure through the catalog; strict quality/build/coverage/full regression; `git diff --check`; and GitNexus current-index/change/impact/cycle review.
   - Intended commit: `feat(atoms): add schema-backed spinner behavior`.
+- **3.3o — Completed:** Add the schema-backed color swatch atom.
+  - Scope: add an independently packaged `ColorSwatch` atom for one decorative color chip, using the shared theme contract and the trusted component-schema catalog. Keep JSON-serializable identity, a hex color value, optional accessible label, size, and shape in the component-local schema; keep the host layout class in runtime-only props. The swatch is display-only; a later ColorPicker molecule composes swatches with selection and a field. Render a decorative `aria-hidden` chip by default, or a `role="img"` element with an accessible name when a label is provided. Do not add command ownership, selection callbacks, popovers, menus, or application-specific styling.
+  - Acceptance: `ColorSwatch` has implementation, separate CSS, schema/generated types/authored runtime types, unit/schema tests, comprehensive Storybook documentation, and local/atomic/public barrels; valid schema configuration renders the matching hex color (via an inline style, not a CSS color literal), size, and shape; a provided label upgrades the element to `role="img"` with an accessible name, while omission renders it `aria-hidden` decorative; invalid configuration (including non-hex colors) cannot reach rendering through the schema-backed path; all-theme and density behavior consume shared semantic tokens for the chip border; no local color literals in CSS.
+  - Targeted files: `packages/ui/src/components/atoms/ColorSwatch/**`; atom/component/package barrels; the trusted schema catalog boundary; focused unit/schema/Storybook tests; `TODO.md`; and no application files.
+  - Tests: schema meta/strict validation, required/unknown/type/enum/pattern/default boundaries, input immutability, generated-type drift, and component-policy checks; config-to-rendering coverage for color/size/shape and label/no-label branches; decorative `aria-hidden` versus `role="img"` accessible-name selection, inline color application, all-theme, Storybook interaction/a11y, and reviewed visual states; invalid-config safe failure through the catalog; strict quality/build/coverage/full regression; `git diff --check`; and GitNexus current-index/change/impact/cycle review.
+  - Intended commit: `feat(atoms): add schema-backed color swatch behavior`.
 - **3.3 — Pending atom roster (see `DevDocs/phase3-component-roster.md`):** Add domain-neutral leaf atoms, one component per bounded sub-step. Message pattern: `feat(atoms): add schema-backed <component> behavior`. Remaining pending atoms, in intended order:
   - **3.3d — Completed:** Label (display). Intended commit: `feat(atoms): add schema-backed label behavior`.
   - **3.3e — Completed:** Icon (display, standalone decorative). Intended commit: `feat(atoms): add schema-backed icon behavior`.
@@ -215,7 +221,7 @@
   - **3.3l — Completed:** Select (input, native wrapper). Intended commit: `feat(atoms): add schema-backed select behavior`.
   - **3.3m — Completed:** Slider (input). Intended commit: `feat(atoms): add schema-backed slider behavior`.
   - **3.3n — Completed:** Spinner (feedback). Intended commit: `feat(atoms): add schema-backed spinner behavior`.
-  - **3.3o — Pending:** ColorSwatch (display). Intended commit: `feat(atoms): add schema-backed color swatch behavior`.
+  - **3.3o — Completed:** ColorSwatch (display). Intended commit: `feat(atoms): add schema-backed color swatch behavior`.
   - Interaction primitives (MenuItem/Menu/Dropdown, ComboBox, Tooltip, SplitButton) and ribbon composites are NOT atoms; they build in 3.4 and Phase 4/5.
 - **3.4 — Pending:** Build accessible popup/dropdown primitives. Intended commit: `feat(atoms): add accessible popup interaction primitives`.
 

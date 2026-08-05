@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ribbon-ui:schema:component:color-swatch:1.0.0",
+  "title": "ColorSwatchConfig",
+  "description": "Serializable configuration for the RibbonUI color swatch atom.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "color"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[a-z][a-z0-9.-]*$",
+      "description": "Stable color swatch instance identifier."
+    },
+    "color": {
+      "type": "string",
+      "pattern": "^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$",
+      "description": "Hex color value applied as the chip fill via an inline style."
+    },
+    "label": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Optional accessible name; when present the swatch becomes a role=img element."
+    },
+    "size": {
+      "type": "string",
+      "enum": ["small", "medium", "large"],
+      "default": "medium",
+      "description": "Explicit chip diameter."
+    },
+    "shape": {
+      "type": "string",
+      "enum": ["square", "circle"],
+      "default": "square",
+      "description": "Chip corner shape."
+    }
+  }
+}
