@@ -2,7 +2,7 @@
 
 - Plan: `docs/plans/2026-08-05-gitnexus-plan-schema-driven-crm-library.md`
 - Branch: `feature/schema-ui-library-v1`
-- Active sub-step: **3.3k — Add the schema-backed switch atom**
+- Active sub-step: **3.3l — Add the schema-backed select atom**
 - Status: In progress
 
 ## Documentation and activation
@@ -179,6 +179,12 @@
   - Targeted files: `packages/ui/src/components/atoms/Radio/**`; atom/component/package barrels; the trusted schema catalog boundary; focused unit/schema/Storybook tests; `TODO.md`; and no application files.
   - Tests: schema meta/strict validation, required/unknown/type/enum/default boundaries, input immutability, generated-type drift, and component-policy checks; config-to-rendering coverage for checked/disabled/required branches; controlled selection via click and Space, focus, disabled, aria associations, all-theme, Storybook interaction/a11y, and reviewed visual states; invalid-config safe failure through the catalog; strict quality/build/coverage/full regression; `git diff --check`; and GitNexus current-index/change/impact/cycle review.
   - Intended commit: `feat(atoms): add schema-backed radio behavior`.
+- **3.3k — Completed:** Add the schema-backed switch atom.
+  - Scope: add an independently packaged `Switch` atom for one on/off setting, using `role="switch"` semantics distinct from ToggleButton's `aria-pressed` button, the shared theme contract, and the trusted component-schema catalog. Keep JSON-serializable identity, label, controlled checked state, disabled, and size in the component-local schema; keep the change callback and ARIA DOM bindings in runtime-only props. Render a visible label plus a custom track/thumb control whose colors flip using existing semantic tokens (accent thumb off / accent track on). Follow the controlled-state precedent (host owns `checked`). Do not add command ownership, icons, menus, or application-specific styling.
+  - Acceptance: `Switch` has implementation, separate CSS, schema/generated types/authored runtime types, unit/schema tests, comprehensive Storybook documentation, and local/atomic/public barrels; valid schema configuration renders the matching label, checked state, size, and disabled; invalid configuration cannot reach rendering through the schema-backed path; click/Enter/Space request the next checked value through onChange without internally owning state; native disabled, focus-visible, accessible naming via the visible label, all-theme, and density behavior are documented and tested; all colors and states use shared semantic tokens.
+  - Targeted files: `packages/ui/src/components/atoms/Switch/**`; atom/component/package barrels; the trusted schema catalog boundary; focused unit/schema/Storybook tests; `TODO.md`; and no application files.
+  - Tests: schema meta/strict validation, required/unknown/type/enum/default boundaries, input immutability, generated-type drift, and component-policy checks; config-to-rendering coverage for checked/size/disabled branches; controlled toggle via click and Space/Enter, focus, disabled, aria associations, all-theme, Storybook interaction/a11y, and reviewed visual states; invalid-config safe failure through the catalog; strict quality/build/coverage/full regression; `git diff --check`; and GitNexus current-index/change/impact/cycle review.
+  - Intended commit: `feat(atoms): add schema-backed switch behavior`.
 - **3.3 — Pending atom roster (see `DevDocs/phase3-component-roster.md`):** Add domain-neutral leaf atoms, one component per bounded sub-step. Message pattern: `feat(atoms): add schema-backed <component> behavior`. Remaining pending atoms, in intended order:
   - **3.3d — Completed:** Label (display). Intended commit: `feat(atoms): add schema-backed label behavior`.
   - **3.3e — Completed:** Icon (display, standalone decorative). Intended commit: `feat(atoms): add schema-backed icon behavior`.
@@ -187,7 +193,7 @@
   - **3.3h — Completed:** TextArea (input). Intended commit: `feat(atoms): add schema-backed text area behavior`.
   - **3.3i — Completed:** Checkbox (input). Intended commit: `feat(atoms): add schema-backed checkbox behavior`.
   - **3.3j — Completed:** Radio (input). Intended commit: `feat(atoms): add schema-backed radio behavior`.
-  - **3.3k — Pending:** Switch (input). Intended commit: `feat(atoms): add schema-backed switch behavior`.
+  - **3.3k — Completed:** Switch (input). Intended commit: `feat(atoms): add schema-backed switch behavior`.
   - **3.3l — Pending:** Select (input, native wrapper). Intended commit: `feat(atoms): add schema-backed select behavior`.
   - **3.3m — Pending:** Slider (input). Intended commit: `feat(atoms): add schema-backed slider behavior`.
   - **3.3n — Pending:** Spinner (feedback). Intended commit: `feat(atoms): add schema-backed spinner behavior`.
