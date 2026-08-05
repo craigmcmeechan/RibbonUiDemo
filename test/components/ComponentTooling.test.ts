@@ -155,6 +155,20 @@ describe('component policy checks', () => {
         writeFile(path.join(componentPath, 'RibbonButton.stories.tsx'), 'export default {};\n'),
     },
     {
+      code: 'component.storybook.prop-documentation',
+      mutate: async (componentPath: string) => {
+        const storyPath = path.join(componentPath, 'RibbonButton.stories.tsx');
+        const story = await readFile(storyPath, 'utf8');
+        await writeFile(
+          storyPath,
+          story.replace(
+            "    id: { description: 'Required",
+            "    undocumentedId: { description: 'Required",
+          ),
+        );
+      },
+    },
+    {
       code: 'component.schema.type-drift',
       mutate: async (componentPath: string) =>
         writeFile(path.join(componentPath, 'RibbonButton.schema.types.ts'), '// stale\n'),

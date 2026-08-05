@@ -11,6 +11,7 @@ export default defineConfig({
     coverage: {
       exclude: ['**/index.ts', '**/*.stories.tsx', '**/*.test.{ts,tsx}'],
       include: [
+        'packages/ui/src/components/**/*.{ts,tsx}',
         'packages/ui/src/schema/**/*.ts',
         'packages/ui/src/runtime/**/*.ts',
         'packages/ui/src/theme/**/*.{ts,tsx}',

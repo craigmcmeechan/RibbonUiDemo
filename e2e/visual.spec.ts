@@ -10,6 +10,16 @@ test('Harness fixture matches its reviewed baseline', async ({ page }) => {
   await expect(story).toHaveScreenshot('harness-fixture.png');
 });
 
+test('Button variants, sizes, disabled state, and themes match the reviewed baseline', async ({
+  page,
+}) => {
+  await page.goto('/iframe.html?id=components-atoms-button--all-themes-and-states&viewMode=story');
+
+  const matrix = page.locator('.button-story-matrix');
+  await expect(matrix.getByRole('button')).toHaveCount(15);
+  await expect(matrix).toHaveScreenshot('button-all-themes-and-states.png');
+});
+
 for (const theme of [
   {
     id: 'foundation-theme-provider--modern-light',

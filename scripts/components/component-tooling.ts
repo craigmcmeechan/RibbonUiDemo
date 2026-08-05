@@ -315,6 +315,7 @@ async function inspectComponent(
   const schemaPath = path.join(componentPath, `${name}.schema.json`);
   const schemaText = await readFile(schemaPath, 'utf8');
   let schema: Record<string, unknown> | undefined;
+  let schemaPropertyNames: readonly string[] = [];
   try {
     schema = JSON.parse(schemaText) as Record<string, unknown>;
   } catch {
@@ -344,6 +345,9 @@ async function inspectComponent(
       );
     }
     const properties = schema['properties'];
+    if (typeof properties === 'object' && properties !== null) {
+      schemaPropertyNames = Object.keys(properties);
+    }
     if (
       typeof properties !== 'object' ||
       properties === null ||
@@ -447,6 +451,28 @@ async function inspectComponent(
           storyPath,
           'component.storybook.documentation',
           `Storybook documentation must cover ${term}.`,
+        ),
+      );
+    }
+  }
+  const runtimeInterface = new RegExp(
+    `export interface ${name}RuntimeProps\\s*\\{(?<body>[\\s\\S]*?)\\}`,
+    'u',
+  ).exec(types)?.groups?.['body'];
+  const runtimePropertyNames =
+    runtimeInterface === undefined
+      ? []
+      : [...runtimeInterface.matchAll(/^\s*readonly\s+(?<name>[A-Za-z][A-Za-z0-9]*)\??\s*:/gmu)]
+          .map((match) => match.groups?.['name'])
+          .filter((propertyName): propertyName is string => propertyName !== undefined);
+  for (const propertyName of [...schemaPropertyNames, ...runtimePropertyNames]) {
+    if (!story.includes(`${propertyName}: {`)) {
+      issues.push(
+        issue(
+          root,
+          storyPath,
+          'component.storybook.prop-documentation',
+          `Storybook argTypes must document ${propertyName}.`,
         ),
       );
     }
