@@ -6,11 +6,11 @@ export interface RibbonTabRuntimeProps {
   /** Controlled active state; the host owns it. */
   readonly active: boolean;
   /** ID of the tab panel this tab controls; runtime-only because it binds host DOM. */
-  readonly ariaControls?: string;
+  readonly ariaControls?: string | undefined;
   /** Optional host layout class. It must not redefine RibbonUI theme values. */
-  readonly className?: string;
+  readonly className?: string | undefined;
   /** Selection callback; runtime-only and never serialized. */
-  readonly onSelect?: () => void;
+  readonly onSelect?: (() => void) | undefined;
 }
 
 export type RibbonTabProps = RibbonTabConfig & RibbonTabRuntimeProps;

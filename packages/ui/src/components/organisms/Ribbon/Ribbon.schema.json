@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ribbon-ui:schema:component:ribbon:1.0.0",
+  "title": "RibbonConfig",
+  "description": "Serializable configuration for the RibbonUI ribbon composition organism.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[a-z][a-z0-9.-]*$",
+      "description": "Stable ribbon instance identifier."
+    },
+    "label": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Optional accessible name for the ribbon tablist."
+    }
+  }
+}

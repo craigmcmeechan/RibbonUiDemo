@@ -2,7 +2,7 @@
 
 - Plan: `docs/plans/2026-08-05-gitnexus-plan-schema-driven-crm-library.md`
 - Branch: `feature/schema-ui-library-v1`
-- Active sub-step: **4.1c — Add the ribbon composition organism**
+- Active sub-step: **4.2 — Enforce fixed common ribbon-group height**
 - Status: In progress
 
 ## Documentation and activation
@@ -239,10 +239,16 @@
   - Targeted files: `packages/ui/src/components/organisms/RibbonControl/**`; organism/component/package barrels; the trusted schema catalog boundary; focused unit/schema/Storybook tests; `TODO.md`; and no application files.
   - Tests: schema meta/strict validation, required/unknown boundaries, input immutability, generated-type drift, and component-policy checks; rendering coverage for each registered control type, command wiring, ToggleButton controlled state, unknown-type fallback, invalid-config fallback, all-theme, Storybook interaction/a11y, and reviewed visual states; strict quality/build/coverage/full regression; `git diff --check`; and GitNexus current-index/change/impact/cycle review.
   - Intended commit: `feat(ribbon): render registered schema-defined controls`.
+- **4.1c — Completed:** Add the ribbon composition organism.
+  - Scope: add an independently packaged `Ribbon` (organism) that composes a `role="tablist"` of RibbonTab buttons with the active tab's RibbonGroup controls rendered through RibbonControl, from a typed ribbon definition, using the shared theme contract. Keep JSON-serializable identity and an optional accessible label in the component-local schema; keep the definition, controlled active-tab id, tab/command/state callbacks, a selection-preservation pointer hook, and className in runtime-only props. Wire `onCommand`, `controlState`, and `onControlChange` through to each control. The selection-preservation hook is a host-bound pointer callback stub; the real editor adapter lands in Phase 7. Do not add overflow/density behavior, the editor adapter, or application-specific controls yet (those belong to 4.3/4.4).
+  - Acceptance: `Ribbon` has implementation, separate CSS, schema/generated types/authored runtime types, unit/schema tests, comprehensive Storybook documentation, and local/organism/public barrels; a valid definition renders the tablist and the active tab's groups and controls deterministically; selecting a tab requests the next active tab; controls receive command/state wiring; the active tab panel is associated with its tab via aria-controls/aria-labelledby without dangling references; invalid renderer configuration cannot reach rendering through the schema-backed path; all-theme behavior consumes shared semantic tokens; no local color literals.
+  - Targeted files: `packages/ui/src/components/organisms/Ribbon/**`; organism/component/package barrels; the trusted schema catalog boundary; focused unit/schema/Storybook tests; `TODO.md`; and no application files.
+  - Tests: schema meta/strict validation, required/unknown boundaries, input immutability, generated-type drift, and component-policy checks; tablist + active-tab rendering, tab selection, group/control rendering via RibbonControl, aria association without dangling refs, selection-preservation pointer hook, all-theme, Storybook interaction/a11y, and reviewed visual states; strict quality/build/coverage/full regression; `git diff --check`; and GitNexus current-index/change/impact/cycle review.
+  - Intended commit: `feat(ribbon): compose schema-defined ribbon regions`.
 - **4.1 — Pending ribbon composition roster (see DevDocs/phase3-component-roster.md):** Implement ribbon tab/group/control composition, one concrete component per bounded sub-step. Message pattern: `feat(ribbon): <outcome>`.
   - **4.1a — Completed:** RibbonTab + RibbonGroup layout primitives. Intended commit: `feat(ribbon): add schema-backed ribbon tab and group primitives`.
   - **4.1b — Completed:** Ribbon control renderer + registry (SplitButton deferred). Intended commit: `feat(ribbon): render registered schema-defined controls`.
-  - **4.1c — Pending:** Ribbon composition (tab bar + active groups + controls, active-tab state, selection-preservation hook stub). Intended commit: `feat(ribbon): compose schema-defined ribbon regions`.
+  - **4.1c — Completed:** Ribbon composition (tab bar + active groups + controls, active-tab state, selection-preservation hook stub). Intended commit: `feat(ribbon): compose schema-defined ribbon regions`.
   - **4.2 — Pending:** Enforce fixed common ribbon-group height. Intended commit: `fix(ribbon): enforce consistent group height across controls`.
   - **4.3 — Pending:** Complete ribbon keyboard, focus, overflow, and density behavior. Intended commit: `feat(ribbon): add accessible responsive navigation behavior`.
   - **4.4 — Pending:** Re-express editor ribbon as workspace configuration. Intended commit: `refactor(editor): define ribbon through workspace configuration`.
