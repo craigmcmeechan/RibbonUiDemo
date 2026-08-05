@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ribbon-ui:schema:component:ribbon-control:1.0.0",
+  "title": "RibbonControlConfig",
+  "description": "Serializable configuration for the RibbonUI ribbon control renderer.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[a-z][a-z0-9.-]*$",
+      "description": "Stable ribbon control renderer instance identifier."
+    }
+  }
+}

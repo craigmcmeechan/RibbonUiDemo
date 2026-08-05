@@ -1,0 +1,12 @@
+.ribbon-ui-ribbon-control {
+  display: inline-flex;
+  align-items: center;
+}
+
+.ribbon-ui-ribbon-control__diagnostic {
+  padding: 0.25rem 0.5rem;
+  border: 1px dashed var(--ribbon-ui-border-control);
+  border-radius: var(--ribbon-ui-radius-small);
+  color: var(--ribbon-ui-text-primary);
+  font-size: 0.75rem;
+}
