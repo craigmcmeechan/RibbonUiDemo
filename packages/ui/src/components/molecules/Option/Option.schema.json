@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ribbon-ui:schema:component:option:1.0.0",
+  "title": "OptionConfig",
+  "description": "Serializable configuration for the RibbonUI listbox option primitive.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "value", "label"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[a-z][a-z0-9.-]*$",
+      "description": "Stable option instance identifier."
+    },
+    "value": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Form value submitted when this option is selected."
+    },
+    "label": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Visible text and accessible name for the option."
+    },
+    "disabled": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether the option is skipped by navigation and not selectable."
+    }
+  }
+}

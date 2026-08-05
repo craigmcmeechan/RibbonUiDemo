@@ -1,0 +1,11 @@
+.ribbon-ui-listbox-story-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(10rem, 1fr));
+  gap: 1rem;
+}
+
+@media (max-width: 44rem) {
+  .ribbon-ui-listbox-story-grid {
+    grid-template-columns: 1fr;
+  }
+}

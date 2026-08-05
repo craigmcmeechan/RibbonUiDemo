@@ -2,8 +2,8 @@
 
 - Plan: `docs/plans/2026-08-05-gitnexus-plan-schema-driven-crm-library.md`
 - Branch: `feature/schema-ui-library-v1`
-- Active sub-step: **3.4d — Add the schema-backed listbox primitive**
-- Status: In progress
+- Active sub-step: **4.1 — Implement ribbon tab/group/control composition**
+- Status: Pending — Phase 3 complete; stopping for the 4.x parallelization discussion before Phase 4
 
 ## Documentation and activation
 

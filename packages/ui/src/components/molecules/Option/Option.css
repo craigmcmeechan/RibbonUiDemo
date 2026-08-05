@@ -1,0 +1,27 @@
+.ribbon-ui-option {
+  padding: 0.375rem 0.75rem;
+  color: var(--ribbon-ui-text-primary);
+  font: inherit;
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+.ribbon-ui-option:focus-visible {
+  outline: none;
+  background: var(--ribbon-ui-control-hover);
+}
+
+.ribbon-ui-option:hover:not([data-disabled='true']) {
+  background: var(--ribbon-ui-control-hover);
+}
+
+.ribbon-ui-option[data-selected='true'],
+.ribbon-ui-option[aria-selected='true'] {
+  background: var(--ribbon-ui-control-selected);
+  color: var(--ribbon-ui-control-selected-text);
+}
+
+.ribbon-ui-option[data-disabled='true'] {
+  color: var(--ribbon-ui-text-tertiary);
+  cursor: not-allowed;
+}

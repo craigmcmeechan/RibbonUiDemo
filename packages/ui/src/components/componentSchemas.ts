@@ -10,6 +10,8 @@ import iconSchema from './atoms/Icon/Icon.schema.json';
 import labelSchema from './atoms/Label/Label.schema.json';
 import menuSchema from './molecules/Menu/Menu.schema.json';
 import menuItemSchema from './molecules/MenuItem/MenuItem.schema.json';
+import optionSchema from './molecules/Option/Option.schema.json';
+import listboxSchema from './molecules/Listbox/Listbox.schema.json';
 import popoverSchema from './molecules/Popover/Popover.schema.json';
 import radioSchema from './atoms/Radio/Radio.schema.json';
 import selectSchema from './atoms/Select/Select.schema.json';
@@ -29,7 +31,9 @@ export const BUTTON_SCHEMA_ID = 'urn:ribbon-ui:schema:component:button:1.0.0' as
 export const ICON_BUTTON_SCHEMA_ID = 'urn:ribbon-ui:schema:component:icon-button:1.0.0' as const;
 export const ICON_SCHEMA_ID = 'urn:ribbon-ui:schema:component:icon:1.0.0' as const;
 export const MENU_ITEM_SCHEMA_ID = 'urn:ribbon-ui:schema:component:menu-item:1.0.0' as const;
+export const OPTION_SCHEMA_ID = 'urn:ribbon-ui:schema:component:option:1.0.0' as const;
 export const MENU_SCHEMA_ID = 'urn:ribbon-ui:schema:component:menu:1.0.0' as const;
+export const LISTBOX_SCHEMA_ID = 'urn:ribbon-ui:schema:component:listbox:1.0.0' as const;
 export const LABEL_SCHEMA_ID = 'urn:ribbon-ui:schema:component:label:1.0.0' as const;
 export const POPOVER_SCHEMA_ID = 'urn:ribbon-ui:schema:component:popover:1.0.0' as const;
 export const RADIO_SCHEMA_ID = 'urn:ribbon-ui:schema:component:radio:1.0.0' as const;
@@ -54,6 +58,8 @@ const ribbonComponentSchemas: readonly SchemaDefinition[] = Object.freeze([
   Object.freeze(labelSchema),
   Object.freeze(menuItemSchema),
   Object.freeze(menuSchema),
+  Object.freeze(optionSchema),
+  Object.freeze(listboxSchema),
   Object.freeze(popoverSchema),
   Object.freeze(radioSchema),
   Object.freeze(selectSchema),
