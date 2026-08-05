@@ -2,7 +2,7 @@
 
 - Plan: `docs/plans/2026-08-05-gitnexus-plan-schema-driven-crm-library.md`
 - Branch: `feature/schema-ui-library-v1`
-- Active sub-step: **3.4c — Add the schema-backed dropdown primitive**
+- Active sub-step: **3.4d — Add the schema-backed listbox primitive**
 - Status: In progress
 
 ## Documentation and activation
