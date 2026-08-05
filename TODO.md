@@ -2,7 +2,7 @@
 
 - Plan: `docs/plans/2026-08-05-gitnexus-plan-schema-driven-crm-library.md`
 - Branch: `feature/schema-ui-library-v1`
-- Active sub-step: **2.1 — Freeze legacy characterization and migration criteria**
+- Active sub-step: **2.2 — Decide schema governance and synchronization**
 - Status: In progress
 
 ## Documentation and activation
@@ -43,13 +43,19 @@
 
 ## Phase 2 — Reusable foundation contracts
 
-- **2.1 — In progress:** Freeze legacy characterization and migration criteria.
+- **2.1 — Completed:** Freeze legacy characterization and migration criteria.
   - Scope: create deterministic, scrubbed characterization fixtures and a migration-parity checklist for the unchanged legacy demo covering theme switching, ribbon tabs and selection preservation, panels, editable content, zoom/status counts, Backstage, and dialogs. Record deprecated or unsupported browser behavior without refactoring the legacy application.
   - Acceptance: each required legacy behavior has source-backed expectations and a reproducible automated or explicitly manual scenario; screenshots are stable, reviewed, and free of sensitive data; browser-global and unsupported-browser constraints are documented; the new Editor placeholder and legacy reference remain behaviorally unchanged.
   - Targeted files: characterization tests/fixtures and baselines outside `legacy-editor-claude-design-template/**`, test-harness configuration required to serve the legacy reference, one focused DevDocs migration-parity record, and `TODO.md`.
   - Tests: deterministic legacy static-server smoke and characterization scenarios, baseline generation/comparison where appropriate, existing `pnpm verify`, source-backed scenario review, unchanged legacy source check, `git diff --check`, and GitNexus current-index/change/impact/cycle review.
-  - Intended commit: `test(editor): capture legacy migration baselines`.
-- **2.2 — Pending:** Decide schema governance and synchronization. Intended commit: `docs(schema): define versioned component contract governance`.
+  - Verification: the unchanged legacy source was served through the existing Playwright harness with exact React 18.3.1, ReactDOM 18.3.1, and Babel 7.29.0 packages resolved locally from `package.json`; frozen install and pnpm peer checks passed. Nine Chromium characterization scenarios covered startup/status, theme persistence, ribbon/panel state, document-selection preservation, contenteditable word counts, zoom bounds, Backstage, Share/Plugins overlays, and Ctrl+F's current no-focus behavior. Reviewed light/dark Windows baselines compared successfully. The full strict quality/build/coverage/Storybook/E2E/visual suite, unchanged-legacy check, and diff checks passed. GitNexus indexed the exact working tree with PDG, found no import cycles, classified the configuration diff as low risk, and found the shared legacy-page helper's two expected direct test consumers at low impact. Kimi proposals were treated as advisory; unsupported persistence and ARIA assumptions were rejected through direct source/browser verification.
+  - Commit: `test(editor): capture legacy migration baselines`.
+- **2.2 — In progress:** Decide schema governance and synchronization.
+  - Scope: create an ADR choosing the JSON Schema draft, runtime validator, schema identifier/version convention, component-local schema source-of-truth and TypeScript synchronization direction, required/default/enum/additional-property policy, composition rules, supported migration window and ownership, and structured diagnostic contract. This is a governance decision only; do not implement schema runtime behavior.
+  - Acceptance: decisions are supported by primary documentation and repository constraints; every component's schema/TypeScript/Storybook/runtime-validation synchronization responsibilities are explicit; compatibility, failure, migration, testing, and ownership rules are enforceable; alternatives and deferred implementation details are recorded without inventing product decisions.
+  - Targeted files: one focused schema-governance ADR in `DevDocs/adr/` and `TODO.md` only.
+  - Tests: primary-source link verification, decision/requirement coverage checklist, Markdown formatting, unchanged production/config/test source check, `git diff --check`, and GitNexus current-index/change/impact/cycle review.
+  - Intended commit: `docs(schema): define versioned component contract governance`.
 - **2.3 — Pending:** Implement validation, diagnostics, and schema composition core. Intended commit: `feat(schema): add versioned validation and diagnostics core`.
 - **2.4 — Pending:** Implement shared theme token/provider foundation. Intended commit: `feat(theme): establish shared semantic theme contract`.
 - **2.5 — Pending:** Define command, state, and workspace lifecycle contracts. Intended commit: `feat(runtime): define command and workspace lifecycle boundaries`.

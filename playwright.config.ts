@@ -33,6 +33,13 @@ export default defineConfig({
       timeout: 120_000,
       url: 'http://127.0.0.1:6106',
     },
+    {
+      command:
+        'pnpm exec vite legacy-editor-claude-design-template --host 127.0.0.1 --port 4183 --strictPort',
+      reuseExistingServer: false,
+      timeout: 120_000,
+      url: 'http://127.0.0.1:4183',
+    },
   ],
   ...(isCi ? { workers: 1 } : {}),
 });
