@@ -1,0 +1,25 @@
+.ribbon-ui-icon {
+  display: inline-block;
+  flex: none;
+  color: var(--ribbon-ui-icon-strong);
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.6;
+}
+
+.ribbon-ui-icon[data-size='small'] {
+  width: 1rem;
+  height: 1rem;
+}
+
+.ribbon-ui-icon[data-size='medium'] {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.ribbon-ui-icon[data-size='large'] {
+  width: 1.5rem;
+  height: 1.5rem;
+}

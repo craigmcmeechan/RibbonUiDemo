@@ -2,8 +2,8 @@
 
 - Plan: `docs/plans/2026-08-05-gitnexus-plan-schema-driven-crm-library.md`
 - Branch: `feature/schema-ui-library-v1`
-- Active sub-step: **3.3e — Add the schema-backed icon atom**
-- Status: Pending — 3.3d complete; next atom sub-step 3.3e (Icon)
+- Active sub-step: **3.3f — Add the schema-backed badge atom**
+- Status: Pending — 3.3e complete; next atom sub-step 3.3f (Badge)
 
 ## Documentation and activation
 
@@ -143,9 +143,15 @@
   - Targeted files: `packages/ui/src/components/atoms/Label/**`; atom/component/package barrels; the trusted schema catalog boundary; focused unit/schema/Storybook tests; `TODO.md`; and no application files.
   - Tests: schema meta/strict validation, required/unknown/type/enum/default boundaries, input immutability, generated-type drift, and component-policy checks; config-to-rendering coverage for every variant branch; form `<label>` versus generic span selection through `htmlFor`; accessible-name association, all-theme, Storybook interaction/a11y, and reviewed visual states; invalid-config safe failure through the catalog; strict quality/build/coverage/full regression; `git diff --check`; and GitNexus current-index/change/impact/cycle review.
   - Intended commit: `feat(atoms): add schema-backed label behavior`.
+- **3.3e — Completed:** Add the schema-backed icon atom.
+  - Scope: add an independently packaged `Icon` atom for one decorative allowlisted glyph, used inline in menus, groups, and adornments where an icon-only action (IconButton) is not appropriate. Keep JSON-serializable identity, icon identifier, and size in the component-local schema/generated configuration type; keep the host layout class in runtime-only props. Render the icon `aria-hidden` with no role or accessible name and do not add commands, interactive behavior, arbitrary SVG/HTML injection, labels, menus, or application-specific styling.
+  - Acceptance: `Icon` has implementation, separate CSS, schema/generated types/authored runtime types, unit/schema tests, comprehensive Storybook documentation, and local/atomic/public barrels; valid schema configuration deterministically selects an allowlisted glyph and matching size; invalid or unknown icon configuration cannot reach rendering through the schema-backed path; the icon is hidden from assistive technology, consumes only shared semantic icon tokens, and responds to all-theme and density behavior; all colors and states use shared semantic tokens.
+  - Targeted files: `packages/ui/src/components/atoms/Icon/**`; atom/component/package barrels; the trusted schema catalog boundary; focused unit/schema/Storybook tests; `TODO.md`; and no application files.
+  - Tests: schema meta/strict validation, required/unknown/type/enum/default boundaries, input immutability, generated-type drift, and component-policy checks; config-to-rendering coverage for every icon and size branch; decorative `aria-hidden`, all-theme, density, Storybook interaction/a11y, and reviewed visual states; invalid-config safe failure through the catalog; strict quality/build/coverage/full regression; `git diff --check`; and GitNexus current-index/change/impact/cycle review.
+  - Intended commit: `feat(atoms): add schema-backed icon behavior`.
 - **3.3 — Pending atom roster (see `DevDocs/phase3-component-roster.md`):** Add domain-neutral leaf atoms, one component per bounded sub-step. Message pattern: `feat(atoms): add schema-backed <component> behavior`. Remaining pending atoms, in intended order:
   - **3.3d — Completed:** Label (display). Intended commit: `feat(atoms): add schema-backed label behavior`.
-  - **3.3e — Pending:** Icon (display, standalone decorative). Intended commit: `feat(atoms): add schema-backed icon behavior`.
+  - **3.3e — Completed:** Icon (display, standalone decorative). Intended commit: `feat(atoms): add schema-backed icon behavior`.
   - **3.3f — Pending:** Badge (display, status pill). Intended commit: `feat(atoms): add schema-backed badge behavior`.
   - **3.3g — Pending:** TextInput (input). Intended commit: `feat(atoms): add schema-backed text input behavior`.
   - **3.3h — Pending:** TextArea (input). Intended commit: `feat(atoms): add schema-backed text area behavior`.

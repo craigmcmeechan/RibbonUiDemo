@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ribbon-ui:schema:component:icon:1.0.0",
+  "title": "IconConfig",
+  "description": "Serializable configuration for the decorative RibbonUI icon atom.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "icon"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[a-z][a-z0-9.-]*$",
+      "description": "Stable icon instance identifier."
+    },
+    "icon": {
+      "type": "string",
+      "enum": ["save", "undo", "redo", "search", "close", "more"],
+      "description": "Allowlisted built-in decorative glyph rendered without arbitrary markup."
+    },
+    "size": {
+      "type": "string",
+      "enum": ["small", "medium", "large"],
+      "default": "medium",
+      "description": "Explicit glyph target size."
+    }
+  }
+}
