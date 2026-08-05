@@ -1,0 +1,22 @@
+.ribbon-ui-separator {
+  display: inline-block;
+  flex: none;
+  background: var(--ribbon-ui-border-divider);
+}
+
+.ribbon-ui-separator[data-orientation='vertical'] {
+  width: 1px;
+  min-height: 1.5rem;
+  align-self: stretch;
+}
+
+.ribbon-ui-separator[data-orientation='horizontal'] {
+  height: 1px;
+  width: 100%;
+  min-height: 1px;
+}
+
+.ribbon-ui-separator:focus-visible {
+  outline: 2px solid var(--ribbon-ui-accent);
+  outline-offset: 2px;
+}

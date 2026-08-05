@@ -1,0 +1,37 @@
+.ribbon-ui-separator-story-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.ribbon-ui-separator-story-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.ribbon-ui-separator-story-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(11rem, 1fr));
+  gap: 1rem;
+}
+
+.ribbon-ui-separator-story-theme {
+  display: grid;
+  gap: 0.75rem;
+  padding: 1rem;
+  color: var(--ribbon-ui-text-primary);
+  background: var(--ribbon-ui-surface-app);
+}
+
+.ribbon-ui-separator-story-theme h2 {
+  margin: 0;
+  font: inherit;
+  font-weight: 650;
+}
+
+@media (max-width: 46rem) {
+  .ribbon-ui-separator-story-grid {
+    grid-template-columns: 1fr;
+  }
+}
