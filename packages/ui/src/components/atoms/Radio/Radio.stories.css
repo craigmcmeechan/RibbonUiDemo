@@ -1,0 +1,41 @@
+.ribbon-ui-radio-story-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+.ribbon-ui-radio-story-group legend {
+  font: inherit;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.ribbon-ui-radio-story-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(11rem, 1fr));
+  gap: 1rem;
+}
+
+.ribbon-ui-radio-story-theme {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem;
+  color: var(--ribbon-ui-text-primary);
+  background: var(--ribbon-ui-surface-app);
+}
+
+.ribbon-ui-radio-story-theme h2 {
+  margin: 0 0 0.25rem;
+  font: inherit;
+  font-weight: 650;
+}
+
+@media (max-width: 46rem) {
+  .ribbon-ui-radio-story-grid {
+    grid-template-columns: 1fr;
+  }
+}

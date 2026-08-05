@@ -6,6 +6,7 @@ import buttonSchema from './atoms/Button/Button.schema.json';
 import iconButtonSchema from './atoms/IconButton/IconButton.schema.json';
 import iconSchema from './atoms/Icon/Icon.schema.json';
 import labelSchema from './atoms/Label/Label.schema.json';
+import radioSchema from './atoms/Radio/Radio.schema.json';
 import separatorSchema from './atoms/Separator/Separator.schema.json';
 import textAreaSchema from './atoms/TextArea/TextArea.schema.json';
 import toggleButtonSchema from './atoms/ToggleButton/ToggleButton.schema.json';
@@ -17,6 +18,7 @@ export const BUTTON_SCHEMA_ID = 'urn:ribbon-ui:schema:component:button:1.0.0' as
 export const ICON_BUTTON_SCHEMA_ID = 'urn:ribbon-ui:schema:component:icon-button:1.0.0' as const;
 export const ICON_SCHEMA_ID = 'urn:ribbon-ui:schema:component:icon:1.0.0' as const;
 export const LABEL_SCHEMA_ID = 'urn:ribbon-ui:schema:component:label:1.0.0' as const;
+export const RADIO_SCHEMA_ID = 'urn:ribbon-ui:schema:component:radio:1.0.0' as const;
 export const SEPARATOR_SCHEMA_ID = 'urn:ribbon-ui:schema:component:separator:1.0.0' as const;
 export const TEXT_AREA_SCHEMA_ID = 'urn:ribbon-ui:schema:component:text-area:1.0.0' as const;
 export const TOGGLE_BUTTON_SCHEMA_ID =
@@ -30,6 +32,7 @@ const ribbonComponentSchemas: readonly SchemaDefinition[] = Object.freeze([
   Object.freeze(iconButtonSchema),
   Object.freeze(iconSchema),
   Object.freeze(labelSchema),
+  Object.freeze(radioSchema),
   Object.freeze(separatorSchema),
   Object.freeze(textAreaSchema),
   Object.freeze(toggleButtonSchema),

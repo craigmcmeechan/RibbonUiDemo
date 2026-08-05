@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ribbon-ui:schema:component:radio:1.0.0",
+  "title": "RadioConfig",
+  "description": "Serializable configuration for the RibbonUI radio atom.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "label", "value", "checked", "name"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[a-z][a-z0-9.-]*$",
+      "description": "Stable radio instance identifier; also the native input DOM id."
+    },
+    "label": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Visible text that also supplies the radio accessible name."
+    },
+    "value": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Form value submitted when this radio is the selected option in its group."
+    },
+    "checked": {
+      "type": "boolean",
+      "description": "Controlled checked state rendered by the native input; the host owns the value."
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Shared form field name that groups radios natively."
+    },
+    "disabled": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether native activation and focus participation are disabled."
+    },
+    "required": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether the group must have a selection for native form submission."
+    }
+  }
+}
