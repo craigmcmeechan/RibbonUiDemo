@@ -1,49 +1,51 @@
 import type { Page } from '@playwright/test';
 import { expect } from '@playwright/test';
-import { fileURLToPath } from 'node:url';
 
 const LEGACY_EDITOR_URL = 'http://127.0.0.1:4183';
-
-const legacyDependencies = new Map([
-  [
-    'https://unpkg.com/react@18.3.1/umd/react.development.js',
-    fileURLToPath(
-      new URL('../../node_modules/legacy-react/umd/react.development.js', import.meta.url),
-    ),
-  ],
-  [
-    'https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js',
-    fileURLToPath(
-      new URL('../../node_modules/legacy-react-dom/umd/react-dom.development.js', import.meta.url),
-    ),
-  ],
-  [
-    'https://unpkg.com/@babel/standalone@7.29.0/babel.min.js',
-    fileURLToPath(new URL('../../node_modules/@babel/standalone/babel.min.js', import.meta.url)),
-  ],
-]);
+const LOCAL_HOST_PATTERN = /^https?:\/\/127\.0\.0\.1(?::\d+)?(?:\/|$)/u;
+const LEGACY_DEPENDENCY_PATHS = [
+  '/vendor/react.development.js',
+  '/vendor/react-dom.development.js',
+  '/vendor/babel.min.js',
+];
 
 export async function openLegacyEditor(page: Page) {
   const pageErrors: string[] = [];
+  const loadedDependencies = new Set<string>();
   page.on('pageerror', (error) => {
     pageErrors.push(error.message);
   });
+  page.on('response', (response) => {
+    const url = new URL(response.url());
+    if (LEGACY_DEPENDENCY_PATHS.includes(url.pathname) && response.ok()) {
+      loadedDependencies.add(url.pathname);
+    }
+  });
 
-  await page.route('https://unpkg.com/**', async (route) => {
-    const dependencyPath = legacyDependencies.get(route.request().url());
-
-    if (dependencyPath === undefined) {
-      await route.abort('blockedbyclient');
+  await page.route(/^https?:\/\//u, async (route) => {
+    if (LOCAL_HOST_PATTERN.test(route.request().url())) {
+      await route.continue();
       return;
     }
 
-    await route.fulfill({
-      contentType: 'application/javascript; charset=utf-8',
-      path: dependencyPath,
-    });
+    await route.abort('blockedbyclient');
   });
 
   await page.goto(LEGACY_EDITOR_URL);
   await expect(page.locator('.editor-app')).toBeVisible();
+  expect([...loadedDependencies].sort()).toEqual([...LEGACY_DEPENDENCY_PATHS].sort());
+  await expect
+    .poll(() =>
+      page.evaluate(() => {
+        const runtime = globalThis as typeof globalThis & {
+          Babel?: unknown;
+          React?: unknown;
+          ReactDOM?: unknown;
+        };
+
+        return [typeof runtime.React, typeof runtime.ReactDOM, typeof runtime.Babel];
+      }),
+    )
+    .toEqual(['object', 'object', 'object']);
   expect(pageErrors).toEqual([]);
 }
