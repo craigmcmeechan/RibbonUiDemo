@@ -14,6 +14,8 @@ import optionSchema from './molecules/Option/Option.schema.json';
 import listboxSchema from './molecules/Listbox/Listbox.schema.json';
 import popoverSchema from './molecules/Popover/Popover.schema.json';
 import radioSchema from './atoms/Radio/Radio.schema.json';
+import ribbonGroupSchema from './molecules/RibbonGroup/RibbonGroup.schema.json';
+import ribbonTabSchema from './molecules/RibbonTab/RibbonTab.schema.json';
 import selectSchema from './atoms/Select/Select.schema.json';
 import sliderSchema from './atoms/Slider/Slider.schema.json';
 import separatorSchema from './atoms/Separator/Separator.schema.json';
@@ -36,6 +38,8 @@ export const MENU_SCHEMA_ID = 'urn:ribbon-ui:schema:component:menu:1.0.0' as con
 export const LISTBOX_SCHEMA_ID = 'urn:ribbon-ui:schema:component:listbox:1.0.0' as const;
 export const LABEL_SCHEMA_ID = 'urn:ribbon-ui:schema:component:label:1.0.0' as const;
 export const POPOVER_SCHEMA_ID = 'urn:ribbon-ui:schema:component:popover:1.0.0' as const;
+export const RIBBON_GROUP_SCHEMA_ID = 'urn:ribbon-ui:schema:component:ribbon-group:1.0.0' as const;
+export const RIBBON_TAB_SCHEMA_ID = 'urn:ribbon-ui:schema:component:ribbon-tab:1.0.0' as const;
 export const RADIO_SCHEMA_ID = 'urn:ribbon-ui:schema:component:radio:1.0.0' as const;
 export const SELECT_SCHEMA_ID = 'urn:ribbon-ui:schema:component:select:1.0.0' as const;
 export const SEPARATOR_SCHEMA_ID = 'urn:ribbon-ui:schema:component:separator:1.0.0' as const;
@@ -62,6 +66,8 @@ const ribbonComponentSchemas: readonly SchemaDefinition[] = Object.freeze([
   Object.freeze(listboxSchema),
   Object.freeze(popoverSchema),
   Object.freeze(radioSchema),
+  Object.freeze(ribbonGroupSchema),
+  Object.freeze(ribbonTabSchema),
   Object.freeze(selectSchema),
   Object.freeze(sliderSchema),
   Object.freeze(spinnerSchema),

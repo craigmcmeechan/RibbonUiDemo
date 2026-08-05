@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ribbon-ui:schema:component:ribbon-group:1.0.0",
+  "title": "RibbonGroupConfig",
+  "description": "Serializable configuration for the RibbonUI ribbon group primitive.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "label"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[a-z][a-z0-9.-]*$",
+      "description": "Stable ribbon group instance identifier."
+    },
+    "label": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Visible label rendered beneath the group controls."
+    }
+  }
+}

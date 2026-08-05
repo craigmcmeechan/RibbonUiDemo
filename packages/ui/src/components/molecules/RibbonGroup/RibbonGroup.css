@@ -1,0 +1,22 @@
+.ribbon-ui-ribbon-group {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 0.25rem 0.25rem 0;
+  border-right: 1px solid var(--ribbon-ui-border-divider);
+}
+
+.ribbon-ui-ribbon-group__body {
+  display: flex;
+  align-items: center;
+  flex: 1 1 auto;
+  gap: 0.25rem;
+  min-height: 4.5rem;
+}
+
+.ribbon-ui-ribbon-group__label {
+  padding-top: 0.25rem;
+  color: var(--ribbon-ui-text-primary);
+  font-size: 0.6875rem;
+  text-align: center;
+}

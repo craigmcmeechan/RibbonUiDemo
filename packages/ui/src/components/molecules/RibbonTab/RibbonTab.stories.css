@@ -1,0 +1,9 @@
+.ribbon-ui-ribbon-tab-story-row {
+  display: inline-flex;
+  gap: 0.125rem;
+}
+
+.ribbon-ui-ribbon-tab-story-grid {
+  display: grid;
+  gap: 1rem;
+}

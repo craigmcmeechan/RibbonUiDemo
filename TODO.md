@@ -2,8 +2,8 @@
 
 - Plan: `docs/plans/2026-08-05-gitnexus-plan-schema-driven-crm-library.md`
 - Branch: `feature/schema-ui-library-v1`
-- Active sub-step: **4.1 — Implement ribbon tab/group/control composition**
-- Status: Pending — Phase 3 complete; stopping for the 4.x parallelization discussion before Phase 4
+- Active sub-step: **4.1b — Add the ribbon control renderer and SplitButton**
+- Status: In progress
 
 ## Documentation and activation
 
@@ -227,7 +227,19 @@
 
 ## Phase 4 — Schema-driven ribbon and layout regions
 
-- **4.1 — Pending:** Implement ribbon tab/group/control composition. Intended commit: `feat(ribbon): render registered schema-defined controls`.
+- **4.1a — Completed:** Add the ribbon tab and ribbon group layout primitives.
+  - Scope: add independently packaged `RibbonTab` and `RibbonGroup` (molecule) layout primitives for the ribbon, using the shared theme contract and the trusted component-schema catalog. `RibbonTab` is a `role="tab"` controlled by the host (`active` + `onSelect`); `RibbonGroup` is a `role="group"` with a visible label and a flex body that hosts controls. Keep JSON-serializable identity and label in the component-local schemas; keep `active`, `onSelect`, `ariaControls`, `children`, and `className` in runtime-only props. Do not add the tablist, the control renderer, command wiring, or application-specific styling yet (those belong to 4.1b/4.1c).
+  - Acceptance: `RibbonTab` and `RibbonGroup` have implementation, separate CSS, schema/generated types/authored runtime types, unit/schema tests, comprehensive Storybook documentation, and local/atomic/public barrels; valid schema configuration renders a `role="tab"` with `aria-selected` driven by the controlled `active` state and a `role="group"` with a visible label and control body; invalid configuration cannot reach rendering through the schema-backed path; all-theme behavior consumes shared semantic tokens; the group body stretches to a common height ready for 4.2; no local color literals.
+  - Targeted files: `packages/ui/src/components/molecules/RibbonTab/**` and `packages/ui/src/components/molecules/RibbonGroup/**`; molecule/component/package barrels; the trusted schema catalog boundary; focused unit/schema/Storybook tests; `TODO.md`; and no application files.
+  - Tests: schema meta/strict validation, required/unknown/type/enum/default boundaries, input immutability, generated-type drift, and component-policy checks; config-to-rendering coverage for active/inactive tabs and labelled groups; aria-selected/role/group, all-theme, Storybook interaction/a11y, and reviewed visual states; invalid-config safe failure through the catalog; strict quality/build/coverage/full regression; `git diff --check`; and GitNexus current-index/change/impact/cycle review.
+  - Intended commit: `feat(ribbon): add schema-backed ribbon tab and group primitives`.
+- **4.1 — Pending ribbon composition roster (see DevDocs/phase3-component-roster.md):** Implement ribbon tab/group/control composition, one concrete component per bounded sub-step. Message pattern: `feat(ribbon): <outcome>`.
+  - **4.1a — Completed:** RibbonTab + RibbonGroup layout primitives. Intended commit: `feat(ribbon): add schema-backed ribbon tab and group primitives`.
+  - **4.1b — Pending:** Ribbon control renderer + registry and a SplitButton ribbon control. Intended commit: `feat(ribbon): render registered schema-defined controls`.
+  - **4.1c — Pending:** Ribbon composition (tab bar + active groups + controls, active-tab state, selection-preservation hook stub). Intended commit: `feat(ribbon): compose schema-defined ribbon regions`.
+  - **4.2 — Pending:** Enforce fixed common ribbon-group height. Intended commit: `fix(ribbon): enforce consistent group height across controls`.
+  - **4.3 — Pending:** Complete ribbon keyboard, focus, overflow, and density behavior. Intended commit: `feat(ribbon): add accessible responsive navigation behavior`.
+  - **4.4 — Pending:** Re-express editor ribbon as workspace configuration. Intended commit: `refactor(editor): define ribbon through workspace configuration`.
 - **4.2 — Pending:** Enforce fixed common ribbon-group height. Intended commit: `fix(ribbon): enforce consistent group height across controls`.
 - **4.3 — Pending:** Complete ribbon keyboard, focus, overflow, and density behavior. Intended commit: `feat(ribbon): add accessible responsive navigation behavior`.
 - **4.4 — Pending:** Re-express editor ribbon as workspace configuration. Intended commit: `refactor(editor): define ribbon through workspace configuration`.
